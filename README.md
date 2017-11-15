@@ -47,35 +47,35 @@
 
  This app implements the Learn Math method. There are three phases: 
  
-    * Learn the Math
-    * Apply the Math
-    * Drill 
+   * Learn the Math
+   * Apply the Math
+   * Drill 
 	
  Each phase has separate exercises. 
  
-    * Swipe left and right to move between exercises. 
-    * Within an exercise, swipe up and down to change operators.
-    * Info buttons on each page will help to guide you.
+   * Swipe left and right to move between exercises. 
+   * Within an exercise, swipe up and down to change operators.
+   * Info buttons on each page will help to guide you.
 
  ApplyMath:-
 
-    * After learning new Learn math we apply them solving problems. This embeds them into our memory.
-    * Follow the Facts -> Application -> Drill sequence. For addition and multiplication problems the "carry" function is handled             much the same way you would do it on paper.  
-    * Just enter the correct sequence of digits. Regrouping in subtraction is similar. Just enter the correct sequence of digits.
+   * After learning new Learn math we apply them solving problems. This embeds them into our memory.
+   * Follow the Facts -> Application -> Drill sequence. For addition and multiplication problems the "carry" function is handled             much the same way you would do it on paper.  
+   * Just enter the correct sequence of digits. Regrouping in subtraction is similar. Just enter the correct sequence of digits.
 
  
  LongDivision:-
 
-    * Enter digits in the proper sequence. No short cuts are allowed. Remember to provide remainders as needed.
+   * Enter digits in the proper sequence. No short cuts are allowed. Remember to provide remainders as needed.
 
  Drill:-
 
-    * Solve the problems in this Drill as quickly as you can. Beat the timer and count of questions set in the Menu Options to "win". 
-    * Practicing with Drill builds 'automaticity' - the ability to just know the answer without having to think about it.
+   * Solve the problems in this Drill as quickly as you can. Beat the timer and count of questions set in the Menu Options to "win". 
+   * Practicing with Drill builds 'automaticity' - the ability to just know the answer without having to think about it.
 
 Settings:-
 
-    * Setting will help to select the arithmetic operators, level of difficulty, drill time and number of questions to practice.
+   * Setting will help to select the arithmetic operators, level of difficulty, drill time and number of questions to practice.
 
 
  ==================================================================
