@@ -38,7 +38,7 @@ public class DrillDivision {
         this.context=context;
         Update();
     }
-    //calls this method when this class is called
+    //Calls this method when this class is called
     public void Update() {
         textview_div_one = (TextView) ((Activity)context).findViewById(R.id.textview_div_one);
         textview_mutli = (TextView) ((Activity)context).findViewById(R.id.textview_mutli);
@@ -48,7 +48,7 @@ public class DrillDivision {
         img_bomb= (ImageView) ((Activity)context).findViewById(R.id.img_bomb);
         rl_bomb = (RelativeLayout) ((Activity)context).findViewById(R.id.rl_bomb);
 
-        //setting font style for the textviews
+        //Setting font style for the textviews
         setFontStyle();
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -56,7 +56,7 @@ public class DrillDivision {
         mtextCount = prefs.getString("numberOfQuestions", "0");
     }
 
-    //setting font style for the textviews
+    //Setting font style for the textviews
     private void setFontStyle() {
 
         mfont.fontChange(textview_div_one,"fonts/textFont.ttf",((Activity)context));
@@ -64,14 +64,14 @@ public class DrillDivision {
         mfont.fontChange(textview_div_result,"fonts/textFont.ttf",((Activity)context));
     }
 
-    //method for generating random numbers and setting the 2 random numbers to textviews
+    //Method for generating random numbers and setting the 2 random numbers to textviews
     public void RandomMethodForDivision() {
         textview_div_result.setText("");
         mdivDown=generateRandForDown();
         textview_div_one.setText(String.valueOf(mdivDown));
     }
 
-    //code for division functinality
+    //Code for division functinality
     public void functionalityforDivFluency() {
         String firstRowFirst_cal = String.valueOf(mdivUp / mdivDown);
         if (textview_div_result.getText().toString().equals("")) {
@@ -80,18 +80,18 @@ public class DrillDivision {
                 mseconCharDiv = String.valueOf(firstRowFirst_cal.charAt(1));
                 if (textview_div_result.getText().toString().equals("") && Drill.keyNum.equals(mfirstCharDiv)) {
                     textview_div_result.setText(mfirstCharDiv);
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
 
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
 
             } else if (textview_div_result.getText().toString().equals("") && firstRowFirst_cal.length() == 1) {
                 if (Drill.keyNum.equals(firstRowFirst_cal)) {
                     textview_div_result.setText(firstRowFirst_cal);
-                    //media success
+                    //Media success
                     if (msound) {
                         msound = false;
                         mediaService(R.raw.sucess);
@@ -101,7 +101,7 @@ public class DrillDivision {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //for increasing count and generate random number after click on write answer
+                            //For increasing count and generate random number after click on write answer
                             DrillAddition.text_int++;
                             Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
                             msound=true;
@@ -109,21 +109,21 @@ public class DrillDivision {
                         }
                     }, 1000);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         } else if (!textview_div_result.getText().toString().equals("")) {
             if (firstRowFirst_cal.length()==1) {
-                //no sound here
+                //No sound here
             } else {
                 if (Drill.keyNum.equals(mseconCharDiv)) {
                     textview_div_result.setText(firstRowFirst_cal);
-                    //for audible sound only first time
+                    //For audible sound only first time
                     if (textview_div_result.getText().toString().length() == 2) {
                         if (msound) {
                             msound = false;
-                            //media success
+                            //Media success
                             mediaService(R.raw.sucess);
                         }
                     }
@@ -133,7 +133,7 @@ public class DrillDivision {
                         @Override
                         public void run() {
                             if (textview_div_result.getText().toString().length() == 2) {
-                                //for increasing count and generate random number after click on write answer
+                                //For increasing count and generate random number after click on write answer
                                 DrillAddition.text_int++;
                                 Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
                                 msound=true;
@@ -142,14 +142,14 @@ public class DrillDivision {
                         }
                     }, 1000);
                 }else{
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         }
     }
 
-    //genarate two random numbers
+    //Generate two random numbers
     public int generateRandForDown(){
         int min = 1;
         int max = 10;
@@ -159,7 +159,7 @@ public class DrillDivision {
         textview_div_two.setText(String.valueOf(mdivUp));
         return mrandomNumber;
     }
-    //genarating Random Number
+    //Generating Random Number
     public int genarateRandom() {
         Random r = new Random();
         int Low = 1;
@@ -167,7 +167,7 @@ public class DrillDivision {
         int randomNumber_high = r.nextInt(High-Low+1)+Low;
         int ranTwo =  r.nextInt(High - randomNumber_high + 1) + randomNumber_high;
 
-        //condition for perfect division
+        //Condition for perfect division
         if(mrandomNumber<=ranTwo) {
             if (ranTwo % mrandomNumber == 0) {
                 rand = ranTwo;
@@ -180,7 +180,7 @@ public class DrillDivision {
     }
 
 
-    //for playing the sounds
+    //For playing the sounds
     public void mediaService(int raw) {
         if(msoundShare) {
             final MediaPlayer mp = MediaPlayer.create(context, raw);

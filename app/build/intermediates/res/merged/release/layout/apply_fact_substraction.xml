@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/ll_borrow"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txt_borrow_four_sub"
+            android:textColor="@color/launch_app_bar"
+            android:textSize="@dimen/text_size_apply_facts"
+            android:text="1"
+            android:gravity="center"
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="wrap_content" />
+
+        <TextView
+
+            android:id="@+id/txt_borrow_three_sub"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_apply_facts"
+            android:textColor="@color/launch_app_bar"
+            android:text="1"
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="wrap_content" />
+        <TextView
+
+            android:id="@+id/txt_borrow_two_sub"
+            android:textSize="@dimen/text_size_apply_facts"
+            android:text="1"
+            android:textColor="@color/launch_app_bar"
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <TextView
+
+            android:gravity="center"
+            android:visibility="visible"
+            android:textColor="@color/launch_app_bar"
+            android:id="@+id/txt_borrow_one_sub"
+            android:textSize="@dimen/text_size_apply_facts"
+            android:text="1"
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/ll_up_sub"
+        android:layout_marginRight="5dp"
+
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_borrow"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/txt_number_up_four_sub"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="@color/launch_app_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="@dimen/text_size_two_apply_facts" />
+
+            <TextView
+                android:id="@+id/txt_regroup_lable_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/slash"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="@color/launch_app_bar"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/txt_number_up_three_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/launch_app_bar"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="@dimen/text_size_two_apply_facts" />
+
+            <TextView
+                android:id="@+id/txt_regroup_lable_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/slash"
+                android:textColor="@color/launch_app_bar"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/txt_number_up_two_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="@color/launch_app_bar"
+                android:text="1"
+                android:textSize="@dimen/text_size_two_apply_facts" />
+
+            <TextView
+                android:id="@+id/txt_regroup_lable_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/slash"
+                android:textColor="@color/launch_app_bar"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+
+                android:id="@+id/txt_number_up_one_sub"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textColor="@color/launch_app_bar"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="@dimen/text_size_two_apply_facts" />
+
+            <TextView
+
+                android:id="@+id/txt_regroup_lable_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/slash"
+                android:textColor="@color/launch_app_bar"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/ll_below_sub"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ll_up_sub"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/txt_number_bellow_four_sub"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:text="-"
+                android:layout_centerInParent="true"
+                android:textColor="@color/launch_app_bar"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/txt_number_bellow_three_sub"
+                android:visibility="gone"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:textColor="@color/launch_app_bar"
+
+                android:text="-"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/txt_number_bellow_two_sub"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:text="1"
+                android:textColor="@color/launch_app_bar"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="@dimen/txt_width_apply_facts"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:id="@+id/txt_number_bellow_one_sub"
+                android:textSize="@dimen/text_size_two_apply_facts"
+                android:text="1"
+                android:textColor="@color/launch_app_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/ll_view_sub"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ll_below_sub"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_one_sub"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/txt_number_bellow_four_sub"
+            android:background="@color/launch_app_bar"
+            android:layout_width="120dp"
+            android:layout_height="2dp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ll_view_sub"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginRight="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="@dimen/txt_width_apply_facts"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+
+                    android:id="@+id/txt_result_four_sub"
+                    android:textSize="@dimen/text_size_two_apply_facts"
+                    android:text="8"
+                    android:textColor="@color/launch_app_bar"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="@dimen/txt_width_apply_facts"
+                android:layout_gravity="center"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/txt_result_three_sub"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textSize="@dimen/text_size_two_apply_facts"
+                    android:textColor="@color/launch_app_bar"
+                    android:text="8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="@dimen/txt_width_apply_facts"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                    android:id="@+id/txt_result_two_sub"
+                    android:textSize="@dimen/text_size_two_apply_facts"
+                    android:text="8"
+                    android:textColor="@color/launch_app_bar"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="@dimen/txt_width_apply_facts"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+
+                >
+                <TextView
+                    android:gravity="center_horizontal|center_vertical"
+                    android:id="@+id/txt_result_one_sub"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/text_size_two_apply_facts"
+                    android:textColor="@color/launch_app_bar"
+                    android:text="8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout><!-- From: file:/C:/Users/mohan/Desktop/LearnMath/app/src/main/res/layout/apply_fact_substraction.xml -->

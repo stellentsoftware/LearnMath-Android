@@ -28,7 +28,7 @@ import com.learnmath.utils.FontChange;
 import java.util.Random;
 
 /**
- * Created by mohan on 9/29/2017.
+ * Created by stellent on 9/29/2017.
  */
 public class LearnMath extends Fragment implements View.OnTouchListener {
     private ImageView img_change;
@@ -36,14 +36,14 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
     RelativeLayout main_layout, rl_panda;
     RelativeLayout rl_addition, rl_division, rl_minus, ll_cal;
     LinearLayout ll_multiplication, ll_cal_zero;
-    //textviews for addition
+    //Textviews for addition
     TextView txt_rand_one_add, txt_rand_two_add, txt_first_num_add, txt_second_num_add, txt_result_first_digit, txt_result_second_digit, txt_result_fisrt_demo, txt_result_second_demo;
-    //textviews for multiplications
+    //Textviews for multiplications
     TextView txt_rand_one_mul, txt_rand_two_mul, txt_result_fisrt_demo_mul, txt_result_second_demo_mul, txt_first_num_mul, txt_second_num_mul, txt_result_first_digit_mul, txt_result_second_digit_mul, txt_pandatext;
     private String tag;
-    //imageviews
+    //Imageviews
     ImageView img_info, img_btn_one, img_btn_two, img_btn_three, img_btn_four, img_btn_five, img_btn_six, img_btn_seven, img_btn_eight, img_btn_nine, img_btn_zero, img_arrow, img_arrow_mul, img_panda, img_home, img_settings;
-    // textviews for substraction
+    //Textviews for substraction
     private TextView txt_rand_one_sub, txt_rand_two_sub, txt_total_sub, txt_sub_one, txt_sub_two, txt_sub_three, txt_sub_four, txt_sub_five, txt_sub_six;
     //boolean and integers for both substractions and divisions
     int mtotalSub, muserSubTwo, muserSubFive, muserSubBaseInt;
@@ -51,18 +51,18 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
     private boolean muserSubBaseBoolen, muserSubBaseBoolenFour;
     private boolean muserSubBoolen = true, muserSubBoolenFour = true;
     long systemTime = 0;
-    // textviews for division
+    //Textviews for division
     TextView txt_learn_header, txt_rand_one_div, txt_rand_two_div, txt_total_div, txt_div_one, txt_div_two, txt_div_three, txt_div_four, txt_div_five, txt_div_six;
     int firstRanNum, secondRanNum;
     String finalAddition, finalMultiplication;
-    //count variable for displaying panda
+    //Count variable for displaying panda
     int countForPanda = 0;
-    //static variable for displaying panda
+    //Static variable for displaying panda
     public static String forPanda = "first";
-    //sounds mediaplayer
+    //Sounds mediaplayer
     MediaPlayer mp;
     String keyNum = "";
-    //for swiping left,right,top,bottom
+    //For swiping left,right,top,bottom
     private int mMinDistance = 100;
     private float downX, downY, upX, upY;
     public static final int CLICK_ACTION_THRESHOLD = 200;
@@ -76,7 +76,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
 
         if (view == null) {
             view = inflater.inflate(R.layout.learn_facts, container, false);
-            //main Layout
+            //Main Layout
             img_change = (ImageView) view.findViewById(R.id.img_change);
             rl_addition = (RelativeLayout) view.findViewById(R.id.rl_addition);
             rl_division = (RelativeLayout) view.findViewById(R.id.rl_division);
@@ -86,14 +86,13 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             ll_cal = (RelativeLayout) view.findViewById(R.id.ll_cal);
             ll_cal_zero = (LinearLayout) view.findViewById(R.id.ll_cal_zero);
             img_info = (ImageView) view.findViewById(R.id.img_info);
-            //for panda
+            //For panda
             txt_pandatext = (TextView) view.findViewById(R.id.txt_pandatext);
             img_panda = (ImageView) view.findViewById(R.id.img_panda);
             rl_panda = (RelativeLayout) view.findViewById(R.id.rl_panda);
-            //tab btntons
             img_home = (ImageView) view.findViewById(R.id.img_home);
             img_settings = (ImageView) view.findViewById(R.id.img_settings);
-            //addition views
+            //Addition views
             txt_learn_header = (TextView) view.findViewById(R.id.tv_learn_header);
             txt_rand_one_add = (TextView) view.findViewById(R.id.txt_rand_one_add);
             txt_rand_two_add = (TextView) view.findViewById(R.id.txt_rand_two_add);
@@ -104,7 +103,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             img_arrow = (ImageView) view.findViewById(R.id.img_arrow);
             txt_result_fisrt_demo = (TextView) view.findViewById(R.id.txt_result_fisrt_demo);
             txt_result_second_demo = (TextView) view.findViewById(R.id.txt_result_second_demo);
-            //multiplication views
+            //Multiplication views
             txt_rand_one_mul = (TextView) view.findViewById(R.id.txt_rand_one_mul);
             txt_rand_two_mul = (TextView) view.findViewById(R.id.txt_rand_two_mul);
             txt_first_num_mul = (TextView) view.findViewById(R.id.txt_first_num_mul);
@@ -114,7 +113,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             txt_result_fisrt_demo_mul = (TextView) view.findViewById(R.id.txt_result_fisrt_demo_mul);
             txt_result_second_demo_mul = (TextView) view.findViewById(R.id.txt_result_second_demo_mul);
             img_arrow_mul = (ImageView) view.findViewById(R.id.img_arrow_mul);
-            //sub
+            //Sub
             txt_rand_one_sub = (TextView) view.findViewById(R.id.txt_rand_one_sub);
             txt_rand_two_sub = (TextView) view.findViewById(R.id.txt_rand_two_sub);
             txt_total_sub = (TextView) view.findViewById(R.id.txt_total_sub);
@@ -124,7 +123,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             txt_sub_four = (TextView) view.findViewById(R.id.txt_sub_four);
             txt_sub_five = (TextView) view.findViewById(R.id.txt_sub_five);
             txt_sub_six = (TextView) view.findViewById(R.id.txt_sub_six);
-            //div
+            //Div
             txt_rand_one_div = (TextView) view.findViewById(R.id.txt_rand_one_div);
             txt_rand_two_div = (TextView) view.findViewById(R.id.txt_rand_two_div);
             txt_total_div = (TextView) view.findViewById(R.id.txt_total_div);
@@ -145,9 +144,9 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             img_btn_eight = (ImageView) view.findViewById(R.id.img_btn_eight);
             img_btn_nine = (ImageView) view.findViewById(R.id.img_btn_nine);
             img_btn_zero = (ImageView) view.findViewById(R.id.img_btn_zero);
-            //font for textview
+            //Font for textview
             setFontStyle();
-            //onclicks for keyboard
+            //Onclicks for keyboard
             img_btn_one.setOnTouchListener(this);
             img_btn_two.setOnTouchListener(this);
             img_btn_three.setOnTouchListener(this);
@@ -169,7 +168,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             ll_cal.setOnTouchListener(this);
             ll_cal_zero.setOnTouchListener(this);
 
-            //setting gone if panda is visible
+            //Setting gone if panda is visible
             main_layout.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -182,7 +181,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                 }
             });
 
-            //panda on touch
+            //Panda on touch
             rl_panda.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -194,16 +193,16 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                 }
             });
 
-            //getting the shared preference values
+            //Getting the shared preference values
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             tag = prefs.getString("tag", "");
             sound_share = prefs.getBoolean("sound", true);
             if (LaunchActivity.fromLaunch) {
                 LaunchActivity.fromLaunch = false;
-                //change operation coming from launch only
+                //Change operation coming from launch only
                 changeOperation();
             } else {
-                //change operation coming from other than launch
+                //Change operation coming from other than launch
                 changeOperationSwipe();
             }
 
@@ -213,7 +212,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         return view;
     }
 
-    //setting the font style for the textviews
+    //Setting the font style for the textviews
     private void setFontStyle() {
         mfont.fontChange(txt_learn_header, "fonts/textFont.ttf", getActivity());
         mfont.fontChange(txt_rand_one_add, "fonts/textFont.ttf", getActivity());
@@ -252,24 +251,24 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         mfont.fontChange(txt_div_six, "fonts/textFont.ttf", getActivity());
     }
 
-    //genarate Random Number for Add
+    //Genarate Random Number for Add
     private void genarateRandomAdd() {
-        //calling the panda for displaying the image
+        //Calling the panda for displaying the image
         if (countForPanda == 5) {
             displayingPanda();
         }
         countForPanda++;
-        //genarate random numbers
+        //Genarate random numbers
         firstRanNum = genarateRandom();
         secondRanNum = genarateRandom();
         finalAddition = String.valueOf(firstRanNum + secondRanNum);
-        //setting visibility for the two digits
+        //Setting visibility for the two digits
         if (finalAddition.length() == 2) {
             txt_result_second_digit.setVisibility(View.VISIBLE);
         } else {
             txt_result_second_digit.setVisibility(View.INVISIBLE);
         }
-        //empty the views before setting the value
+        //Empty the views before setting the value
         txt_first_num_add.setText("");
         txt_second_num_add.setText("");
         txt_result_first_digit.setText("");
@@ -277,29 +276,29 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         txt_result_fisrt_demo.setText("");
         txt_result_second_demo.setText("");
         img_arrow.setVisibility(View.GONE);
-        //setting the random number
+        //Setting the random number
         txt_rand_one_add.setText(String.valueOf(firstRanNum));
         txt_rand_two_add.setText(String.valueOf(secondRanNum));
     }
 
-    //genarating Random Number for multiplication
+    //Genarating Random Number for multiplication
     private void genarateRandomMul() {
-        //calling the panda for displaying the image
+        //Calling the panda for displaying the image
         if (countForPanda == 5) {
             displayingPanda();
         }
         countForPanda++;
-        //genarate random numbers
+        //Genarate random numbers
         firstRanNum = genarateRandom();
         secondRanNum = genarateRandom();
         finalMultiplication = String.valueOf(firstRanNum * secondRanNum);
-        //setting visibility for two digits
+        //Setting visibility for two digits
         if (finalMultiplication.length() == 2) {
             txt_result_second_digit_mul.setVisibility(View.VISIBLE);
         } else {
             txt_result_second_digit_mul.setVisibility(View.INVISIBLE);
         }
-        //empty the views before value set
+        //Empty the views before value set
         txt_first_num_mul.setText("");
         txt_second_num_mul.setText("");
         txt_result_first_digit_mul.setText("");
@@ -307,14 +306,14 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         txt_result_fisrt_demo_mul.setText("");
         txt_result_second_demo_mul.setText("");
         img_arrow_mul.setVisibility(View.GONE);
-        //setting the random number
+        //Setting the random number
         txt_rand_one_mul.setText(String.valueOf(firstRanNum));
         txt_rand_two_mul.setText(String.valueOf(secondRanNum));
     }
 
-    //genarate random numbers for substraction
+    //Genarate random numbers for substraction
     private void generateRandomSub() {
-        //calling the panda for displaying the image
+        //Calling the panda for displaying the image
         if (countForPanda == 5) {
             displayingPanda();
         }
@@ -322,13 +321,13 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         firstRanNum = genarateRandom();
         secondRanNum = genarateRandom();
         mtotalSub = firstRanNum + secondRanNum;
-        //for same random numbers
+        //For same random numbers
         if (firstRanNum == secondRanNum) {
             muserSubSame = true;
         } else {
             muserSubSame = false;
         }
-        //for two digit result
+        //For two digit result
         if (String.valueOf(mtotalSub).length() > 1) {
             muserSubBaseBoolen = true;
             muserSubBaseBoolenFour = true;
@@ -341,11 +340,11 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             muserSubBoolen = false;
             muserSubBoolenFour = false;
         }
-        //setting the random values to the views
+        //Setting the random values to the views
         txt_rand_one_sub.setText(String.valueOf(firstRanNum));
         txt_rand_two_sub.setText(String.valueOf(secondRanNum));
         txt_total_sub.setText(String.valueOf(mtotalSub));
-        //empty the views before value is change
+        //Empty the views before value is change
         txt_sub_one.setText("");
         txt_sub_two.setText("");
         txt_sub_three.setText("");
@@ -354,7 +353,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         txt_sub_six.setText("");
     }
 
-    //genarate random numbers for division
+    //Genarate random numbers for division
     private void generateRandomDiv() {
         if (countForPanda == 5) {
             //calling the panda for displaying the image
@@ -364,13 +363,13 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         firstRanNum = genarateRandom();
         secondRanNum = genarateRandom();
         mtotalSub = firstRanNum * secondRanNum;
-        //for same random numbers
+        //For same random numbers
         if (firstRanNum == secondRanNum) {
             muserSubSame = true;
         } else {
             muserSubSame = false;
         }
-        //for two digit result
+        //For two digit result
         if (String.valueOf(mtotalSub).length() > 1) {
             muserSubBaseBoolen = true;
             muserSubBaseBoolenFour = true;
@@ -383,11 +382,11 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
             muserSubBoolen = false;
             muserSubBoolenFour = false;
         }
-        //setting the random numbers for views
+        //Setting the random numbers for views
         txt_rand_one_div.setText(String.valueOf(firstRanNum));
         txt_rand_two_div.setText(String.valueOf(secondRanNum));
         txt_total_div.setText(String.valueOf(mtotalSub));
-        //empty the views before changing value
+        //Empty the views before changing value
         txt_div_one.setText("");
         txt_div_two.setText("");
         txt_div_three.setText("");
@@ -396,7 +395,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         txt_div_six.setText("");
     }
 
-    //genarating Random Number
+    //Genarating Random Number
     public int genarateRandom() {
         int min = 1;
         int max = 9;
@@ -405,9 +404,9 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         return ranNum;
     }
 
-    //changing the operation based on the selection
+    //Changing the operation based on the selection
     private void changeOperation() {
-        //for intial sound
+        //For intial sound
         mediaService(R.raw.sucess);
         countForPanda = 0;
         forPanda = "first";
@@ -459,7 +458,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         }
     }
 
-    //changing the operation while siping the screen
+    //Changing the operation while siping the screen
     private void changeOperationSwipe() {
         countForPanda = 0;
         forPanda = "first";
@@ -520,9 +519,9 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                     if (Math.abs(deltaX) > Math.abs(deltaY)) {
                         mediaService(R.raw.swoosh);
                         if (Math.abs(deltaX) > mMinDistance) {
-                            // left or right
+                            // Left or right
                             if (deltaX < 0) {
-                                //swipe left
+                                //Swipe left
                                 Settings settings = new Settings();
                                 getFragmentManager().beginTransaction()
                                         .setCustomAnimations(
@@ -551,12 +550,12 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                     //VERTICAL SCROLL
                     else {
                         if (Math.abs(deltaY) > mMinDistance) {
-                            // top or down
+                            //Top or down
                             if (deltaY < 0) {
 
                                 countForPanda = 0;
                                 forPanda = "first";
-                                //for change operator sound
+                                //For change operator sound
                                 mediaService(R.raw.change);
                                 if ("add".equals(img_change.getTag())) {
                                     img_change.setImageResource(R.drawable.division);
@@ -608,9 +607,9 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                             if (deltaY > 0) {
                                 countForPanda = 0;
                                 forPanda = "first";
-                                //for change operator sound
+                                //For change operator sound
                                 mediaService(R.raw.change);
-                                // swipe up
+                               //Swipe up
                                 if ("add".equals(img_change.getTag())) {
                                     img_change.setImageResource(R.drawable.minus);
                                     img_change.setTag("sub");
@@ -659,7 +658,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                                 return true;
                             }
                         } else {
-                            //not long enough swipe...
+                            //Not long enough swipe...
                             return false;
                         }
                     }
@@ -670,9 +669,9 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         return false;
     }
 
-    //performing onclick for views
+    //Performing onclick for views
     public void onClick(View v) {
-        //onclicks for views
+        //Onclicks for views
         switch (v.getId()) {
             case R.id.img_btn_zero:
                 keyNum = "0";
@@ -705,12 +704,12 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                 keyNum = "9";
                 break;
             case R.id.img_home:
-                //home onclick
+                //Home onclick
                 keyNum = "";
                 getActivity().finish();
                 break;
             case R.id.img_settings:
-                //settings onclick
+                //Settings onclick
                 keyNum = "";
                 Settings settings = new Settings();
                 getFragmentManager().beginTransaction()
@@ -728,11 +727,11 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         }
         if (!keyNum.equals("")) {
             if (tag.equals("add")) {
-                //setting the values for addition
+                //Setting the values for addition
                 img_arrow.setVisibility(View.GONE);
                 functionalityAdd();
             } else if (tag.equals("mul")) {
-                //setting the values for multiplication
+                //Setting the values for multiplication
                 img_arrow_mul.setVisibility(View.GONE);
                 functionalityMul();
             } else if (tag.equals("sub")) {
@@ -743,7 +742,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         }
     }
 
-    //save the selected operation
+    //Save the selected operation
     public void saveSelectedOperation(String tag) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = prefs.edit();
@@ -751,36 +750,36 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         editor.commit();
     }
 
-    //addition Functionality
+    //Addition Functionality
     private void functionalityAdd() {
         if (txt_first_num_add.getText().toString().equals("")) {
-            //checking the enter number with second random number
+            //Checking the enter number with second random number
             if (keyNum.equals(txt_rand_two_add.getText().toString())) {
                 txt_first_num_add.setText(keyNum);
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
             } else {
                 img_arrow.setVisibility(View.VISIBLE);
                 img_arrow.setImageResource(R.drawable.down_left);
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else if (txt_second_num_add.getText().toString().equals("")) {
-            //checking the enter number with first random number
+            //Checking the enter number with first random number
             if (keyNum.equals(txt_rand_one_add.getText().toString())) {
                 txt_second_num_add.setText(keyNum);
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
             } else {
                 img_arrow.setVisibility(View.VISIBLE);
                 img_arrow.setImageResource(R.drawable.downright);
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else if (txt_result_first_digit.getText().toString().equals("")) {
-            //check the length of the fianl result and set the value
+            //Check the length of the fianl result and set the value
             if (finalAddition.length() <= 1 && keyNum.equals(finalAddition)) {
-                //media sucess
+                //Media sucess
                 mediaService(R.raw.sucess);
                 txt_result_first_digit.setText(keyNum);
                 txt_result_fisrt_demo.setText(keyNum);
@@ -792,19 +791,19 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                     }
                 }, 1000);
             } else if (finalAddition.length() == 2) {
-                //check the length of the fianl result and set the second digit
+                //Check the length of the fianl result and set the second digit
                 String firstChar = String.valueOf(finalAddition.charAt(0));
                 if (keyNum.equals(firstChar)) {
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                     txt_result_first_digit.setText(keyNum);
                     txt_result_fisrt_demo.setText(keyNum);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else if (finalAddition.length() > 1) {
@@ -813,7 +812,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                 if (keyNum.equals(secondChar)) {
                     txt_result_second_digit.setText(keyNum);
                     txt_result_second_demo.setText(keyNum);
-                    //media sucess
+                    //Media sucess
                     mediaService(R.raw.sucess);
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -823,15 +822,15 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                         }
                     }, 1000);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else {
-            //media no
+            //Media no
             mediaService(R.raw.no);
         }
     }
@@ -840,11 +839,11 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
     private void functionalityMul() {
         if (txt_first_num_mul.getText().toString().equals("")) {
             if (keyNum.equals(txt_rand_two_mul.getText().toString())) {
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
                 txt_first_num_mul.setText(keyNum);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
                 img_arrow_mul.setVisibility(View.VISIBLE);
                 img_arrow_mul.setImageResource(R.drawable.down_left);
@@ -852,12 +851,12 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         } else if (txt_second_num_mul.getText().toString().equals("")) {
             if (keyNum.equals(txt_rand_one_mul.getText().toString())) {
                 txt_second_num_mul.setText(keyNum);
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
             } else {
                 img_arrow_mul.setVisibility(View.VISIBLE);
                 img_arrow_mul.setImageResource(R.drawable.downright);
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else if (txt_result_first_digit_mul.getText().toString().equals("")) {
@@ -871,21 +870,21 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                         genarateRandomMul();
                     }
                 }, 1000);
-                //media success
+                //Media success
                 mediaService(R.raw.sucess);
             } else if (finalMultiplication.length() == 2) {
                 String firstChar = String.valueOf(finalMultiplication.charAt(0));
                 if (keyNum.equals(firstChar)) {
                     txt_result_first_digit_mul.setText(keyNum);
                     txt_result_fisrt_demo_mul.setText(keyNum);
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else if (finalMultiplication.length() > 1) {
@@ -901,134 +900,134 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                             genarateRandomMul();
                         }
                     }, 1000);
-                    //media success
+                    //Media success
                     mediaService(R.raw.sucess);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else {
-            //media no
+            //Media no
             mediaService(R.raw.no);
         }
     }
 
-    //division functionality
+    //Division functionality
     private void functionalityDiv(String keyNum) {
         int user_number = Integer.parseInt(keyNum);
-        //conditions for box one
+        //Conditions for box one
         if (muserSubBaseBoolen || txt_div_one.getText().toString().equals("")) {
-            //if box one requires two digits
+            //If box one requires two digits
             if (muserSubBaseBoolen) {
-                //for first digit
+                //For first digit
                 if (muserSubBoolen && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(0))) == user_number) {
                     txt_div_one.setText(String.valueOf(user_number));
                     muserSubBaseInt = user_number;
                     muserSubBoolen = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
-                    //for second digit
+                    //For second digit
                 } else if (!muserSubBoolen && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(1))) == user_number) {
                     String a = String.valueOf(muserSubBaseInt) + String.valueOf(user_number);
                     txt_div_one.setText(a);
                     muserSubBaseBoolen = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
-            //  if box one contains single digit
+            //  If box one contains single digit
             else {
                 if (mtotalSub == user_number) {
                     txt_div_one.setText(String.valueOf(user_number));
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         }
-        //conditon for second box
+        //Conditon for second box
         else if (txt_div_two.getText().toString().equals("")) {
             if (firstRanNum == user_number || secondRanNum == user_number) {
                 txt_div_two.setText(String.valueOf(user_number));
                 muserSubTwo = user_number;
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         }
-        //conditon for third box
+        //Conditon for third box
         else if (txt_div_three.getText().toString().equals("")) {
-            //result condition on third box
+            //Result condition on third box
             if (user_number == (mtotalSub / muserSubTwo)) {
                 txt_div_three.setText(String.valueOf(user_number));
-                //media sucess
+                //Media sucess
                 mediaService(R.raw.sucess);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
 
         }
-        //condition for fourth box
+       //Condition for fourth box
         else if (muserSubBaseBoolenFour || txt_div_four.getText().toString().equals("")) {
-            //if it contains two digits
+            //If it contains two digits
             if (muserSubBaseBoolenFour) {
-                //for 1st digit
+                //For 1st digit
                 if (muserSubBoolenFour && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(0))) == user_number) {
                     txt_div_four.setText(String.valueOf(user_number));
                     muserSubBaseInt = user_number;
                     muserSubBoolenFour = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
-                    //for 2nd digit
+                    //For 2nd digit
                 } else if (!muserSubBoolenFour && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(1))) == user_number) {
                     String a = String.valueOf(muserSubBaseInt) + String.valueOf(user_number);
                     txt_div_four.setText(a);
                     muserSubBaseBoolenFour = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
-            //if it contains single digit
+            //If it contains single digit
             else {
                 if (mtotalSub == user_number) {
                     txt_div_four.setText(String.valueOf(user_number));
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         }
-        //condition for fifth box
+       //Condition for fifth box
         else if (txt_div_five.getText().toString().equals("")) {
-//if box 2 and box five should have same number or not
+//If box 2 and box five should have same number or not
             if (muserSubSame ? muserSubTwo == user_number : muserSubTwo != user_number && (user_number == firstRanNum || user_number == secondRanNum)) {
                 txt_div_five.setText(String.valueOf(user_number));
                 muserSubFive = user_number;
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         }
-        //condition for final box
+      //Condition for final box
         else if (txt_div_six.getText().toString().equals("")) {
 
             if (user_number == (mtotalSub / muserSubFive)) {
@@ -1040,135 +1039,135 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                         generateRandomDiv();
                     }
                 }, 1000);
-                //media sucess
+                //Media sucess
                 mediaService(R.raw.sucess);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else {
-            //media no
+            //Media no
             mediaService(R.raw.no);
         }
     }
 
-    // substraction functionality
+   //Substraction functionality
     private void functionalitySub(String keynum) {
         int user_number = Integer.parseInt(keynum);
-        //condition for first box
+      //Condition for first box
         if (muserSubBaseBoolen || txt_sub_one.getText().toString().equals("")) {
-            //condition if total result is two digits
+          //Condition if total result is two digits
             if (muserSubBaseBoolen) {
-                //condition if total result is two digits  and for first number
+              //Condition if total result is two digits  and for first number
                 if (muserSubBoolen && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(0))) == user_number) {
                     txt_sub_one.setText(String.valueOf(user_number));
                     muserSubBaseInt = user_number;
                     muserSubBoolen = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 }
-                //condition if total result is two digits  and for second number
+              //Condition if total result is two digits  and for second number
                 else if (!muserSubBoolen && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(1))) == user_number) {
                     String a = String.valueOf(muserSubBaseInt) + String.valueOf(user_number);
                     txt_sub_one.setText(a);
                     muserSubBaseBoolen = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
-            //condition if total result is single digits
+          //Condition if total result is single digits
             else {
-                //checks weather user entry and result matches
+              //Checks weather user entry and result matches
                 if (mtotalSub == user_number) {
                     txt_sub_one.setText(String.valueOf(user_number));
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         }
-        //condition for second box any of random number
+      //Condition for second box any of random number
         else if (txt_sub_two.getText().toString().equals("")) {
             //any of random number
             if (firstRanNum == user_number || secondRanNum == user_number) {
                 txt_sub_two.setText(String.valueOf(user_number));
                 muserSubTwo = user_number;
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         }
-        //condition for third box
+      //Condition for third box
         else if (txt_sub_three.getText().toString().equals("")) {
-            //result of one and two
+           //Result of one and two
             if (user_number == (mtotalSub - muserSubTwo)) {
                 txt_sub_three.setText(String.valueOf(user_number));
-                //media sucess
+                //Media sucess
                 mediaService(R.raw.sucess);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         }
-        //condition for fourth box
+      //Condition for fourth box
         else if (muserSubBaseBoolenFour || txt_sub_four.getText().toString().equals("")) {
-//if it contains two digits
+//If it contains two digits
             if (muserSubBaseBoolenFour) {
-// condition for first digit
+// Condition for first digit
                 if (muserSubBoolenFour && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(0))) == user_number) {
                     txt_sub_four.setText(String.valueOf(user_number));
                     muserSubBaseInt = user_number;
                     muserSubBoolenFour = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 }
-                //condition for second digit
+              //Condition for second digit
                 else if (!muserSubBoolenFour && Integer.parseInt(String.valueOf(String.valueOf(mtotalSub).charAt(1))) == user_number) {
                     String a = String.valueOf(muserSubBaseInt) + String.valueOf(user_number);
                     txt_sub_four.setText(a);
                     muserSubBaseBoolenFour = false;
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
-            //if it contains single digits
+            //If it contains single digits
             else {
                 if (mtotalSub == user_number) {
                     txt_sub_four.setText(String.valueOf(user_number));
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         }
-        //condition for fifth box
+      //Condition for fifth box
         else if (txt_sub_five.getText().toString().equals("")) {
-//it checks whether 5th box and 2nd box should have same numbers or not
+//It checks whether 5th box and 2nd box should have same numbers or not
             if (muserSubSame ? muserSubTwo == user_number : muserSubTwo != user_number && (user_number == firstRanNum || user_number == secondRanNum)) {
                 txt_sub_five.setText(String.valueOf(user_number));
                 muserSubFive = user_number;
-                //media yes
+                //Media yes
                 mediaService(R.raw.yes);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         }
-        //condition for sixth box
+      //Condition for sixth box
         else if (txt_sub_six.getText().toString().equals("")) {
-            //condition for result
+          //Condition for result
             if (user_number == (mtotalSub - muserSubFive)) {
                 txt_sub_six.setText(String.valueOf(user_number));
 
@@ -1179,19 +1178,19 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
                         generateRandomSub();
                     }
                 }, 1000);
-                //media sucess
+                //Media sucess
                 mediaService(R.raw.sucess);
             } else {
-                //media no
+                //Media no
                 mediaService(R.raw.no);
             }
         } else {
-            //media no
+            //Media no
             mediaService(R.raw.no);
         }
     }
 
-    // setting the time for displaying the operation image
+   //Setting the time for displaying the operation image
     public void timerDelayRemoveView(final ImageView v) {
         v.setVisibility(View.VISIBLE);
         Handler handler = new Handler();
@@ -1202,7 +1201,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         }, 500);
     }
 
-    //displaying panda after every successful 5 times
+    //Displaying panda after every successful 5 times
     public void displayingPanda() {
         if (forPanda.equals("first")) {
             countForPanda = 0;
@@ -1276,7 +1275,7 @@ public class LearnMath extends Fragment implements View.OnTouchListener {
         }
     }
 
-    // for finding the onclick
+    //For finding the onclick
     private boolean isAClick(float startX, float endX, float startY, float endY) {
         float differenceX = Math.abs(startX - endX);
         float differenceY = Math.abs(startY - endY);

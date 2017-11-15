@@ -14,7 +14,7 @@ import com.learnmath.fragments.LearnMath;
 import com.learnmath.fragments.Settings;
 
 /**
- * Created by mohan on 10/4/2017.
+ * Created by stellentsoft on 10/4/2017.
  */
 public class MainActivity extends Activity {
     FrameLayout frag;
@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         frag = (FrameLayout) findViewById(R.id.frag);
         rl_black = (RelativeLayout) findViewById(R.id.rl_black);
 
-        //moving to learn facts activity
+        //Moving to learn facts activity
         LearnMath learnFacts = new LearnMath();
         rl_black.setVisibility(View.VISIBLE);
         getFragmentManager().beginTransaction()
@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
         boolean handled = false;
         Fragment fragment = getFragmentManager().findFragmentById(R.id.frag);
         if (fragment instanceof Settings) {
-            //back press from setting screen
+            //Back press from setting screen
             Settings settingFragment = (Settings) fragment;
             handled = settingFragment.backButton();
         }

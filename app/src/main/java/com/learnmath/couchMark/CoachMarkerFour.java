@@ -10,7 +10,7 @@ import com.learnmath.R;
 import com.learnmath.activities.LaunchActivity;
 
 /**
- * Created by mohan on 10/20/2017.
+ * Created by stellent on 10/20/2017.
  */
 public class CoachMarkerFour extends android.support.v4.app.Fragment implements View.OnClickListener {
 

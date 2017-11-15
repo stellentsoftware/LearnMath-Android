@@ -10,7 +10,7 @@ import com.learnmath.R;
 import com.learnmath.activities.LaunchActivity;
 
 /**
- * Created by mohan on 10/20/2017.
+ * Created by stellent on 10/20/2017.
  */
 public class CoachMarkerThree extends android.support.v4.app.Fragment implements View.OnClickListener {
 
@@ -33,7 +33,7 @@ public class CoachMarkerThree extends android.support.v4.app.Fragment implements
 
     @Override
     public void onClick(View v) {
-        //onclicks for coach marks
+        //Onclicks for coach marks
         if (v.equals(rl_couch_three_left)) {
             LaunchActivity.mPager.setCurrentItem(1, true);
         } else if (v.equals(rl_couch_three_right)) {

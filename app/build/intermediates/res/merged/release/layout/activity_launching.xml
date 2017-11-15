@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rel_body"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash"
+     tools:context=".LaunchingActivity">
+
+    <RelativeLayout
+        android:layout_centerInParent="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+
+            android:layout_marginBottom="150dp"
+
+            android:src="@drawable/app_icon"
+            android:layout_width="200dp"
+            android:layout_height="200dp" />
+        <LinearLayout
+            android:id="@+id/llPlusMinus"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/btn_plus"
+
+                android:layout_width="@dimen/launch_operation_height"
+                android:layout_height="@dimen/launch_operation_height"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/btn_minus"
+                android:layout_width="@dimen/launch_operation_height"
+                android:layout_height="@dimen/launch_operation_height"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/llPlusMinus"
+            android:id="@+id/llMulDiv"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_division"
+
+                android:layout_width="@dimen/launch_operation_height"
+                android:layout_height="@dimen/launch_operation_height"
+
+                />
+            <TextView
+                android:layout_marginLeft="10dp"
+
+                android:id="@+id/btn_mult"
+                android:layout_width="@dimen/launch_operation_height"
+                android:layout_height="@dimen/launch_operation_height"
+
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_pager"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+
+            />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+
+
+</RelativeLayout>
+<!-- From: file:/C:/Users/mohan/Desktop/LearnMath/app/src/main/res/layout/activity_launching.xml -->

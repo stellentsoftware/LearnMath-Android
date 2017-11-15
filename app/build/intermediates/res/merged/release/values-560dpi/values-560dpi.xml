@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/C:/Users/mohan/Desktop/LearnMath/app/src/main/res/values-560dpi/dimens.xml -->
+    <eat-comment/>
+    <dimen name="apply_div_key_height">200dp</dimen>
+    <dimen name="couch_mark_one_height">130dp</dimen>
+    <dimen name="couch_mark_one_width">100dp</dimen>
+    <dimen name="couch_one_mar_left">100dp</dimen>
+    <dimen name="couch_one_mar_top">130dp</dimen>
+    <dimen name="couch_two_mar_bottom">100dp</dimen>
+    <dimen name="couch_two_width">90dp</dimen>
+    <dimen name="div_divident_text_size">30dp</dimen>
+    <dimen name="div_text_size">20dp</dimen>
+    <dimen name="img_down_arrow_one_height">35dp</dimen>
+    <dimen name="img_down_arrow_three_height">180dp</dimen>
+    <dimen name="img_down_arrow_two_height">110dp</dimen>
+    <dimen name="margin_switch">10dp</dimen>
+    <dimen name="margin_top5">9dp</dimen>
+    <dimen name="text_middle_size">20dp</dimen>
+    <dimen name="text_size">25dp</dimen>
+    <dimen name="text_size_div">30dp</dimen>
+    <dimen name="text_size_div_result">25dp</dimen>
+    <dimen name="textview_div_height">60dp</dimen>
+    <dimen name="txt_size_apply">50dp</dimen>
+</resources>

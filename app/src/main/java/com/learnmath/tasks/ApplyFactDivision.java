@@ -20,7 +20,7 @@ import com.learnmath.utils.FontChange;
 import java.util.Random;
 
 /**
- * Created by mohan on 10/16/2017.
+ * Created by stellent on 10/16/2017.
  */
 public class ApplyFactDivision {
     Context context;
@@ -41,9 +41,9 @@ public class ApplyFactDivision {
         this.context=context;
         Update();
     }
-    //calls this method when this class is called
+    //Calls this method when this class is called
     public void Update(){
-        //getting division textviews
+        //Getting division textviews
         txt_quot_one = (TextView) ((Activity)context).findViewById(R.id.txt_quot_one);
         txt_quot_two = (TextView) ((Activity)context).findViewById(R.id.txt_quot_two);
         txt_quot_three = (TextView) ((Activity)context).findViewById(R.id.txt_quot_three);
@@ -80,7 +80,7 @@ public class ApplyFactDivision {
         txt_ninth_first = (TextView) ((Activity)context).findViewById(R.id.txt_ninth_first);
         txt_ninth_second = (TextView) ((Activity)context).findViewById(R.id.txt_ninth_second);
 
-        //setting the font style for the textviews
+        //Setting the font style for the textviews
         setTypeFace();
         view_one = (View) ((Activity)context).findViewById(R.id.view_one);
         view_two = (View) ((Activity)context).findViewById(R.id.view_two);
@@ -90,16 +90,16 @@ public class ApplyFactDivision {
         img_arrow_two =(ImageView) ((Activity)context).findViewById(R.id.img_arrow_two);
         img_arrow_three =(ImageView) ((Activity)context).findViewById(R.id.img_arrow_three);
         img_up_arrow=(ImageView) ((Activity)context).findViewById(R.id.img_up_arrow);
-        //for panda
+        //For panda
         img_panda = (ImageView) ((Activity)context).findViewById(R.id.img_panda);
         rl_panda =  (RelativeLayout) ((Activity)context).findViewById(R.id.rl_panda);
         txt_pandatext = (TextView) ((Activity)context).findViewById(R.id.txt_pandatext);
-        //getting the values from shared preference
+        //Getting the values from shared preference
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         mlevel = Integer.parseInt(prefs.getString("level", "1"));
         msoundShare = prefs.getBoolean("sound", true);
     }
-    //setting the font style for the textviews
+    //Setting the font style for the textviews
     private void setTypeFace() {
         mfont.fontChange(txt_quot_one,"fonts/textFont.ttf",((Activity)context));
         mfont.fontChange(txt_quot_two,"fonts/textFont.ttf",((Activity)context));
@@ -138,10 +138,10 @@ public class ApplyFactDivision {
         mfont.fontChange(txt_ninth_second,"fonts/textFont.ttf",((Activity)context));
     }
 
-    //genarate random number for division
+    //Generate random number for division
     public void geanarateRandomApplyDiv() {
         mremainder=false;
-        //increase the count of panda
+        //Increase the count of panda
         if(ApplyMath.fromFirst) {
             ApplyMath.fromFirst =false;
             ApplyMath.countForPanda =0;
@@ -149,11 +149,11 @@ public class ApplyFactDivision {
             ApplyMath.countForPanda++;
         }
         mdivClear=true;
-        //calling the panda for displaying the image
+        //Calling the panda for displaying the image
         if (ApplyMath.countForPanda == 5) {
             displayingPanda();
         }
-        //empty the values before setting data
+        //Empty the values before setting data
         view_one.setVisibility(View.GONE);
         view_two.setVisibility(View.GONE);
         view_three.setVisibility(View.GONE);
@@ -193,7 +193,7 @@ public class ApplyFactDivision {
         txt_divident_two.setText("");
         txt_divident_three.setText("");
         txt_divident_four.setText("");
-        //genarate random numbers for levels
+        //Generate random numbers for levels
       switch (mlevel)
       {
           case 1:
@@ -247,16 +247,16 @@ public class ApplyFactDivision {
         }
     }
 
-    //genarate random number
+    //Generate random number
     public int genarateRandom(int min,int max) {
         Random r = new Random();
         int ranOne = r.nextInt(max - min + 1) + min;
         return ranOne;
     }
-    //functionality for division
+    //Functionality for division
     public void functionalityforDiv(String keyNum) {
         if (mdivClear) {
-            //setting the values to the views when click on keyboard
+            //Setting the values to the views when click on keyboard
             if (txt_first_row_first_number.getText().toString().equals(" ")) {
                 int mfirstQuotient, mfirstResult;
                 if (mDigitOne < mfirstRanNumDivisor) {
@@ -617,7 +617,7 @@ public class ApplyFactDivision {
         }
     }
 
-    //caliculation for the quotient
+    //Calculation for the quotient
     private void caliculationForTheDivision(TextView txtQuotatoion, TextView txtRowValueSecond, TextView txtRowValueFirst, String keyNum, View view, TextView txtMinus, int msecondQuotient, int msecondResult) {
         if (txtQuotatoion.getText().toString().equals(" ") && keyNum.equals(String.valueOf(msecondQuotient))) {
             txtQuotatoion.setText(String.valueOf(msecondQuotient));
@@ -655,7 +655,7 @@ public class ApplyFactDivision {
     }
 
 
-    //for playing the sounds
+    //For playing the sounds
     public void mediaService(int raw) {
         if(msoundShare) {
             final MediaPlayer mp = MediaPlayer.create(context, raw);
@@ -686,7 +686,7 @@ public class ApplyFactDivision {
         }
     }
 
-    //for displaying the panda
+    //For displaying the panda
     public void displayingPanda () {
 
         if (ApplyMath.forPanda_apply.equals("first")) {
@@ -700,7 +700,7 @@ public class ApplyFactDivision {
             visiblePanda(R.drawable.panda_three);
         }
     }
-    //visibility for the panda image
+    //Visibility for the panda image
     private void visiblePanda(int imgPanda) {
         ApplyMath.countForPanda = 0;
         rl_panda.setVisibility(View.VISIBLE);
@@ -711,7 +711,7 @@ public class ApplyFactDivision {
     }
 
 
-    // set visibility gone after after panda displaying
+    // Set visibility gone after after panda displaying
     public void handlerForPanda(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -724,7 +724,7 @@ public class ApplyFactDivision {
         }, 6000);
     }
 
-    //genarate random number after success
+    //Generate random number after success
     public void handlerForGenarateRandom(){
         mdivClear=false;
         final Handler handler = new Handler();

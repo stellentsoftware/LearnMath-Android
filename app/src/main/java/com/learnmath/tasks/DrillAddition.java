@@ -39,7 +39,7 @@ public class DrillAddition {
         this.context=context;
         Update();
     }
-    //calls this method when this class is called
+    //Calls this method when this class is called
     public void Update(){
         textview_add_one = (TextView) ((Activity)context).findViewById(R.id.textview_add_one);
         textview_plus = (TextView) ((Activity)context).findViewById(R.id.textview_plus);
@@ -48,21 +48,21 @@ public class DrillAddition {
         textview_add_result = (TextView) ((Activity)context).findViewById(R.id.textview_add_result);
         img_bomb= (ImageView) ((Activity)context).findViewById(R.id.img_bomb);
         rl_bomb = (RelativeLayout) ((Activity)context).findViewById(R.id.rl_bomb);
-        //set font style for the textview
+        //Set font style for the textview
         setFontStyle();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         msoundshare = prefs.getBoolean("sound", true);
         mtextCount = prefs.getString("numberOfQuestions", "0");
     }
 
-    //setting font style for the textviews
+    //Setting font style for the textviews
     private void setFontStyle() {
         mfont.fontChange(textview_add_one,"fonts/textFont.ttf",((Activity)context));
         mfont.fontChange(textview_add_two,"fonts/textFont.ttf",((Activity)context));
         mfont.fontChange(textview_add_result,"fonts/textFont.ttf",((Activity)context));
     }
 
-    //method for generating random numbers and setting the 2 random numbers to textviews
+    //Method for generating random numbers and setting the 2 random numbers to textviews
     public void RandomMethodForAddition() {
         textview_add_result.setText("");
         firstRanNum_add = genarateRandom();
@@ -73,22 +73,22 @@ public class DrillAddition {
         txt_equal_to.setVisibility(View.VISIBLE);
     }
 
-    //addition functionality
+    //Addition functionality
     public void functionalityforAdd() {
-        //condition for first click
+        //Condition for first click
         if (textview_add_result.getText().toString().equals("")) {
             mfirstColumnResult = String.valueOf(Integer.parseInt(textview_add_one.getText().toString()) + Integer.parseInt(textview_add_two.getText().toString()));
-            //if addition result length is equal to 2
+            //If addition result length is equal to 2
             if (mfirstColumnResult.length() == 2) {
-                //split that result into two variables
+                //Split that result into two variables
                 mfirstChar = String.valueOf(mfirstColumnResult.charAt(0));
                 mseconChar = String.valueOf(mfirstColumnResult.charAt(1));
                 if (textview_add_result.getText().toString().equals("") && Drill.keyNum.equals(mfirstChar)) {
                     textview_add_result.setText(mfirstChar);
-                    //media yes
+                    //Media yes
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
 
@@ -104,7 +104,7 @@ public class DrillAddition {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //for increasing count and generate random number after click on write answer
+                            //For increasing count and generate random number after click on write answer
                             text_int++;
                             Drill.textview_count.setText(text_int + "/" + mtextCount);
                             msound=true;
@@ -113,18 +113,18 @@ public class DrillAddition {
                     }, 1000);
 
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         } else if (!textview_add_result.getText().toString().equals("")) {
             if (mfirstColumnResult.length() == 1) {
-                //no sound here
+                //No sound here
             } else {
                 if (Drill.keyNum.equals(mseconChar)) {
                     textview_add_result.setText(mfirstChar + mseconChar);
                     final Handler handler = new Handler();
-                    //for audible sound only first time
+                    //For audible sound only first time
                     if (textview_add_result.getText().toString().length() == 2) {
                         if (msound) {
                             msound = false;
@@ -136,7 +136,7 @@ public class DrillAddition {
                         @Override
                         public void run() {
                             if (textview_add_result.getText().toString().length() == 2) {
-                                //for increasing count and generate random number after click on write answer
+                                //For increasing count and generate random number after click on write answer
                                 text_int++;
                                 Drill.textview_count.setText(text_int + "/" + mtextCount);
                                 msound = true;
@@ -146,14 +146,14 @@ public class DrillAddition {
                     }, 1000);
 
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         }
     }
 
-    //genarating Random Number
+    //Generating Random Number
     public int genarateRandom() {
         int min = 1;
         int max = 9;
@@ -162,7 +162,7 @@ public class DrillAddition {
         return ranOne;
     }
 
-    //for playing the sounds
+    //For playing the sounds
     public void mediaService(int raw) {
         if(msoundshare) {
             final MediaPlayer mp = MediaPlayer.create(context, raw);

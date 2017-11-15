@@ -20,7 +20,7 @@ import com.learnmath.utils.FontChange;
 import java.util.Random;
 
 /**
- * Created by mohan on 10/13/2017.
+ * Created by stellent on 10/13/2017.
  */
 public class ApplyFactAddition {
     Context context;
@@ -35,9 +35,9 @@ public class ApplyFactAddition {
         this.context=context;
         Update();
     }
-    //calls this method when this class is called
+    //Calls this method when this class is called
     public void Update(){
-        //getting the textviews
+        //Getting the textviews
          txt_number_up_one_add = (TextView) ((Activity)context).findViewById(R.id.txt_number_up_one_add);
          txt_number_up_two_add = (TextView) ((Activity)context).findViewById(R.id.txt_number_up_two_add);
          txt_number_up_three_add = (TextView) ((Activity)context).findViewById(R.id.txt_number_up_three_add);
@@ -58,10 +58,10 @@ public class ApplyFactAddition {
         txt_pandatext= (TextView) ((Activity)context).findViewById(R.id.txt_pandatext);
         //Setting font style for the textview
         setFontStyle();
-        //for panda
+        //For panda
         img_panda = (ImageView) ((Activity)context).findViewById(R.id.img_panda);
         rl_panda =  (RelativeLayout) ((Activity)context).findViewById(R.id.rl_panda);
-        //getting values from shared preference
+        //Getting values from shared preference
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         mlevel = Integer.parseInt(prefs.getString("level", "1"));
         msoundShare = prefs.getBoolean("sound", true);
@@ -88,9 +88,9 @@ public class ApplyFactAddition {
 
     }
 
-    //genarate random number for addition
+    //Generate random number for addition
     public void geanarateRandomApplyAdd() {
-        //increase the success count
+        //Increase the success count
         if(ApplyMath.fromFirst) {
             ApplyMath.fromFirst =false;
             ApplyMath.countForPanda =0;
@@ -98,11 +98,11 @@ public class ApplyFactAddition {
             ApplyMath.countForPanda++;
         }
         madditionClear=true;
-        //calling the panda for displaying the image
+        //Calling the panda for displaying the image
         if (ApplyMath.countForPanda == 5) {
             displayingPanda();
         }
-        //empty the views before setting the value
+        //Empty the views before setting the value
         txt_number_up_one_add.setText("");
         txt_number_up_two_add.setText("");
         txt_number_up_three_add.setText("");
@@ -119,7 +119,7 @@ public class ApplyFactAddition {
         txt_result_four_add.setText("");
         txt_result_five_add.setText("");
 
-        //genarate random number based on levels
+        //Generate random number based on levels
         switch(mlevel){
             case 1:
                 genarateRandomLow();
@@ -173,7 +173,7 @@ public class ApplyFactAddition {
                 break;
         }
     }
-    //functionality for addition
+    //Functionality for addition
     public void functionalityforAdd(int mlevel) {
         if(madditionClear) {
             if (txt_result_one_add.getText().toString().equals("")) {
@@ -275,18 +275,18 @@ public class ApplyFactAddition {
             }
         }
     }
-    //caliculation for one digit number
+    //Calculation for one digit number
     private void caliculationOneDigitMulResult(TextView txtFirstView, String finalResult) {
         txtFirstView.setText(finalResult);
         mediaService(R.raw.yes);
     }
-    //caliculation for One digit number when level complet
+    //Calculation for One digit number when level complet
     private void caliculationOneDigitMulSucceess(TextView txtFirstView, String finalResult) {
         txtFirstView.setText(finalResult);
         mediaService(R.raw.sucess);
         handlerForGenarateRandom();
     }
-    //caliculation for two digit number
+    //Calculation for two digit number
     private void caliculationForTwoDigitMulResult(TextView txtFirstView, TextView txtSecondView, String finalResult) {
         String firstChar = String.valueOf(finalResult.charAt(0));
         String seconChar = String.valueOf(finalResult.charAt(1));
@@ -297,11 +297,11 @@ public class ApplyFactAddition {
             txtSecondView.setText(seconChar);
             mediaService(R.raw.yes);
         } else {
-            //media no
+            //Media no
             mediaService(R.raw.no);
         }
     }
-    //caliculation for two digit number when level complet
+    //Calculation for two digit number when level complet
     private void caliculationForTwoDigitMulSuccess(TextView txtFirstView, TextView txtSecondView, String finalResult) {
         String firstChar = String.valueOf(finalResult.charAt(0));
         String seconChar = String.valueOf(finalResult.charAt(1));
@@ -313,12 +313,12 @@ public class ApplyFactAddition {
             mediaService(R.raw.sucess);
             handlerForGenarateRandom();
         } else {
-            //media no
+            //Media no
             mediaService(R.raw.no);
         }
     }
 
-    //genarating Random Number
+    //Generating Random Number
     public int genarateRandom() {
         int min = 1;
         int max = 9;
@@ -326,13 +326,13 @@ public class ApplyFactAddition {
         int ranOne = r.nextInt(max - min + 1) + min;
         return ranOne;
     }
-    //genarating Random Number bitween range
+    //Generating Random Number between range
     public int genarateRandomrange(int min,int max) {
         Random r = new Random();
         int ranOne = r.nextInt(max - min + 1) + min;
         return ranOne;
     }
-    //genarating Random Number
+    //Generating Random Number
     public int genarateRandomLow() {
         int min = 1;
         int max = 7;
@@ -341,7 +341,7 @@ public class ApplyFactAddition {
         mranNumTwo =  r.nextInt(max - mranNumOne + 1) + mranNumOne;
         return mranNumOne;
     }
-    //for playing the sounds
+    //For playing the sounds
     public void mediaService(int raw) {
         if(msoundShare) {
             final MediaPlayer mp = MediaPlayer.create(context, raw);
@@ -371,7 +371,7 @@ public class ApplyFactAddition {
         }
     }
 
-    //for displaying the panda after every 5 successfull answers
+    //For displaying the panda after every five successful answers
     public void displayingPanda () {
 
         if (ApplyMath.forPanda_apply.equals("first")) {
@@ -387,7 +387,7 @@ public class ApplyFactAddition {
         }
     }
 
-    //set visibility gone after after panda displaying
+    //Set visibility gone after after panda displaying
     public void refreshTheItems(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -400,7 +400,7 @@ public class ApplyFactAddition {
         }, 6000);
     }
 
-    //genarate random number after success
+    //Generate random number after success
     public void handlerForGenarateRandom(){
         madditionClear=false;
         final Handler handler = new Handler();
@@ -411,7 +411,7 @@ public class ApplyFactAddition {
             }
         }, 1000);
     }
-    //visibility for the panda image
+    //Visibility for the panda image
     public void visiblePanda(int imgPanda){
         ApplyMath.countForPanda = 0;
         rl_panda.setVisibility(View.VISIBLE);

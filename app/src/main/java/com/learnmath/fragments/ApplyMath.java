@@ -20,12 +20,12 @@ import com.learnmath.R;
 import com.learnmath.tasks.ApplyFactAddition;
 import com.learnmath.tasks.ApplyFactDivision;
 import com.learnmath.tasks.ApplyFactMultiplication;
-import com.learnmath.tasks.ApplyFactsSubstraction;
+import com.learnmath.tasks.ApplyFactsSubtraction;
 import com.learnmath.tasks.DrillAddition;
 import com.learnmath.utils.FontChange;
 
 /**
- * Created by mohan on 10/4/2017.
+ * Created by stellent on 10/4/2017.
  */
 public class ApplyMath extends Fragment implements View.OnTouchListener {
     FontChange mfont = new FontChange();
@@ -33,7 +33,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
     LinearLayout ll_keyboard;
     ImageView img_change;
     public static boolean apply_facts_timer = false;
-    //for swiping left,right,top,bottom
+    //For swiping left,right,top,bottom
     private int min_distance = 100;
     private float downX, downY, upX, upY;
     ImageView img_info, img_btn_one, img_btn_two, img_btn_three, img_btn_four, img_btn_five, img_btn_six, img_btn_seven, img_btn_eight, img_btn_nine, img_btn_zero, img_home, img_settings;
@@ -45,15 +45,15 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
     public static int level_change = 1;
     public static boolean regroup = false, regroup_four = false;
     public static int level = 1;
-    //count variable for displaying panda
+    //Count variable for displaying panda
     public static int countForPanda = 0;
-    //static variable for displaying panda
+    //Static variable for displaying panda
     public static String forPanda_apply = "first";
     public static String keyNum = "";
     public static boolean sound_share = false;
     ApplyFactAddition applyAdition;
     ApplyFactMultiplication applyMultiplication;
-    ApplyFactsSubstraction applyFactsSubstraction;
+    ApplyFactsSubtraction applyFactsSubstraction;
     ApplyFactDivision applyFactDivision;
     public static boolean timer_not_null_applyfacts = false, fromFirst = false, applyInstance = false;
     View view;
@@ -76,7 +76,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
             img_info = (ImageView) view.findViewById(R.id.img_info);
             tv_regroup = (TextView) view.findViewById(R.id.tv_regroup);
             tv_apply_header = (TextView) view.findViewById(R.id.tv_apply_header);
-            //for panda
+            //For panda
             txt_pandatext = (TextView) view.findViewById(R.id.txt_pandatext);
             img_panda = (ImageView) view.findViewById(R.id.img_panda);
             rl_panda = (RelativeLayout) view.findViewById(R.id.rl_panda);
@@ -102,7 +102,6 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
             tv_btn_nine = (TextView) view.findViewById(R.id.tv_btn_nine);
             tv_btn_zer0 = (TextView) view.findViewById(R.id.tv_btn_zer0);
             tv_btn_rem = (TextView) view.findViewById(R.id.tv_btn_rem);
-            //tab btntons
             img_home = (ImageView) view.findViewById(R.id.img_home);
             img_settings = (ImageView) view.findViewById(R.id.img_settings);
             //Setting font style for the textviews
@@ -138,14 +137,14 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
             tv_btn_nine.setOnTouchListener(this);
             tv_btn_zer0.setOnTouchListener(this);
             tv_btn_rem.setOnTouchListener(this);
-            //getting  values from shared preference
+            //Getting  values from shared preference
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             level = Integer.parseInt(prefs.getString("level", "1"));
             apply_tag = prefs.getString("apply_tag", "add");
             countForPanda = 0;
             apply_facts_timer = true;
             sound_share = prefs.getBoolean("sound", true);
-            //level change for substraction
+            //Level change for substraction
             level_change = level;
             //setting gone if panda is visible
             rl_facts_main.setOnTouchListener(new View.OnTouchListener() {
@@ -160,7 +159,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
                 }
             });
 
-            //panda on touch
+            //Panda on touch
             rl_panda.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -205,10 +204,10 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
         if (!applyInstance) {
             applyAdition = new ApplyFactAddition(getActivity());
             applyMultiplication = new ApplyFactMultiplication(getActivity());
-            applyFactsSubstraction = new ApplyFactsSubstraction(getActivity());
+            applyFactsSubstraction = new ApplyFactsSubtraction(getActivity());
             applyFactDivision = new ApplyFactDivision(getActivity());
             fromFirst = true;
-            //calling the addition,multiplication,division and substraction views for generate random number
+            //Calling the addition,multiplication,division and substraction views for generate random number
             switch (apply_tag) {
                 case "add":
                     img_change.setTag("add");
@@ -270,11 +269,11 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
                     if (Math.abs(deltaX) > Math.abs(deltaY)) {
                         mediaService(R.raw.swoosh);
                         if (Math.abs(deltaX) > min_distance) {
-                            // left or right
+                            // Left or right
                             if (deltaX < 0) {
                                 countForPanda = 0;
                                 forPanda_apply = "first";
-                                //swipe left
+                                //Swipe left
                                 LearnMath learnFacts = new LearnMath();
                                 getFragmentManager().beginTransaction()
                                         .setCustomAnimations(
@@ -313,12 +312,12 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
                     //VERTICAL SCROLL
                     else {
                         if (Math.abs(deltaY) > min_distance) {
-                            // top or down
+                            // Top or down
                             if (deltaY < 0) {
                                 countForPanda = 0;
                                 fromFirst = true;
                                 forPanda_apply = "first";
-                                //for change operator sound
+                                //For change operator sound
                                 mediaService(R.raw.change);
                                 switch (img_change.getTag().toString()) {
                                     case "add":
@@ -383,7 +382,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
 
                                 }
 
-                                //save the selected operation
+                                //Save the selected operation
                                 return true;
                             }
                             if (deltaY > 0) {
@@ -391,7 +390,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
                                 fromFirst = true;
                                 forPanda_apply = "first";
                                 mediaService(R.raw.change);
-                                // swipe up
+                                // Swipe up
                                 switch (img_change.getTag().toString()) {
                                     case "add":
                                         img_change.setImageResource(R.drawable.minus);
@@ -457,7 +456,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
                             }
 
                         } else {
-                            //not long enough swipe...
+                            //Not long enough swipe...
                             return false;
                         }
                     }
@@ -468,9 +467,9 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
         return false;
     }
 
-    //performing onclick for the views
+    //Performing onclick for the views
     public void onClick(View v) {
-        //onclicks for views
+        //Onclicks for views
         switch (v.getId()) {
             case R.id.img_btn_zero:
             case R.id.tv_btn_zer0:
@@ -574,7 +573,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
         }
     }
 
-    // setting the time for displaying the operation image
+    // Setting the time for displaying the operation image
     public void timerDelayRemoveView(final ImageView v) {
         v.setVisibility(View.VISIBLE);
         Handler handler = new Handler();
@@ -585,7 +584,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
         }, 500);
     }
 
-    //save the selected operation
+    //Save the selected operation
     public void saveSelectedOperation(String apply_tag) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = prefs.edit();
@@ -593,7 +592,7 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
         editor.commit();
     }
 
-    //for playing the sounds
+    //For playing the sounds
     public void mediaService(int raw) {
         if (sound_share) {
             final MediaPlayer mp = MediaPlayer.create(getActivity(), raw);
@@ -622,14 +621,14 @@ public class ApplyMath extends Fragment implements View.OnTouchListener {
         }
     }
 
-    // for finding the onclick
+    // For finding the onclick
     private boolean isAClick(float startX, float endX, float startY, float endY) {
         float differenceX = Math.abs(startX - endX);
         float differenceY = Math.abs(startY - endY);
         return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
     }
 
-    //displaying info dialog
+    //Displaying info dialog
     private void showDialogInfo() {
         final Dialog dialog = new Dialog(getActivity(), R.style.DialogTheme);
         dialog.setCancelable(false);

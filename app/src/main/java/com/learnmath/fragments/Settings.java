@@ -19,7 +19,7 @@ import com.learnmath.R;
 import com.learnmath.utils.FontChange;
 
 /**
- * Created by mohan on 10/5/2017.
+ * Created by stellent on 10/5/2017.
  */
 public class Settings extends Fragment implements View.OnClickListener {
     RelativeLayout rl_apply;
@@ -65,10 +65,10 @@ public class Settings extends Fragment implements View.OnClickListener {
         img_operation_div = (ImageView) view.findViewById(R.id.img_operation_div);
         txt_apply = (TextView) view.findViewById(R.id.txt_apply);
 
-        //setting font style for the text views
+        //Setting font style for the text views
         setFontStyle();
 
-        //setting onclicks
+        //Setting onclicks
         img_level_one.setOnClickListener(this);
         img_level_two.setOnClickListener(this);
         img_level_three.setOnClickListener(this);
@@ -100,7 +100,7 @@ public class Settings extends Fragment implements View.OnClickListener {
             txt_seek_bar_questions.setText(number_of_questions_share);
         }
 
-        //setting the lavel status of settings getting from the shared preference
+        //Setting the lavel status of settings getting from the shared preference
         if (level_from_share.equals("")) {
             math_level = "1";
             img_level_one.setImageResource(R.drawable.level_one_selected);
@@ -137,7 +137,7 @@ public class Settings extends Fragment implements View.OnClickListener {
             }
         }
 
-        //setting the selected numbers status of settings getting from the shared preference
+        //Setting the selected numbers status of settings getting from the shared preference
         if (selected_numbers_share.equals("")) {
             selectedNumbers = "3";
         } else {
@@ -171,7 +171,7 @@ public class Settings extends Fragment implements View.OnClickListener {
 
         }
 
-        //setting the operation status of settings getting from the shared preference
+        //Setting the operation status of settings getting from the shared preference
         if (operation_share.equals("")) {
             operation = "add";
         } else {
@@ -203,7 +203,7 @@ public class Settings extends Fragment implements View.OnClickListener {
                     break;
             }
         }
-        //setting the drill time status of settings getting from the shared preference
+        //Setting the drill time status of settings getting from the shared preference
 
         if (drill_time_share.equals("")) {
             drill_time = "60";
@@ -213,24 +213,24 @@ public class Settings extends Fragment implements View.OnClickListener {
             drill_time = drill_time_share;
             customSeekBar_drill.setProgress(Integer.parseInt(drill_time));
         }
-        //setting the number of questions status of settings getting from the shared preference
+        //Setting the number of questions status of settings getting from the shared preference
         if (number_of_questions_share.equals("")) {
             customSeekBar_questions.setProgress(0);
         } else {
             number_of_questions = number_of_questions_share;
             customSeekBar_questions.setProgress(Integer.parseInt(number_of_questions));
         }
-        //setting the sound status of settings getting from the shared preference
+        //Setting the sound status of settings getting from the shared preference
         sound = sound_share;
         switch_sound.setChecked(sound); //false default
-        //change the sound status
+        //Change the sound status
         switch_sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 sound = isChecked;
             }
         });
 
-        // perform seek bar change listener event used for getting the drill value
+        // Perform seek bar change listener event used for getting the drill value
         customSeekBar_drill.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txt_seek_bar_drill.setText(String.valueOf(progress));
@@ -244,7 +244,7 @@ public class Settings extends Fragment implements View.OnClickListener {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        // perform seek bar change listener event used for getting the number of questions value
+        // Perform seek bar change listener event used for getting the number of questions value
         customSeekBar_questions.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 txt_seek_bar_questions.setText(String.valueOf(progress));
@@ -262,7 +262,7 @@ public class Settings extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    //setting font style for the text views
+    //Setting font style for the text views
     private void setFontStyle() {
 
         mfont.fontChange(txt_settings_head, "fonts/textFont.ttf", getActivity());
@@ -278,10 +278,10 @@ public class Settings extends Fragment implements View.OnClickListener {
 
     }
 
-    //performing onclick for views
+    //Performing onclick for views
     @Override
     public void onClick(View view) {
-        //performing on click for  buttons
+        //Performing on click for  buttons
         switch (view.getId()) {
             case R.id.img_close:
                 img_close_boolean = true;
@@ -379,7 +379,7 @@ public class Settings extends Fragment implements View.OnClickListener {
                 if (Drill.waitTimer != null) {
                     Drill.waitTimer.cancel();
                 }
-                //save values in shared preference
+                //Save values in shared preference
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("level", math_level);
@@ -400,7 +400,7 @@ public class Settings extends Fragment implements View.OnClickListener {
 
     }
 
-    //handle device back button
+    //Handle device back button
     public boolean backButton() {
         inSettings = false;
         getFragmentManager().popBackStack();

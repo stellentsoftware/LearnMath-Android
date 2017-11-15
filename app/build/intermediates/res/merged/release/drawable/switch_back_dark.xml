@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/switch_color"/>
+    <corners android:radius="30dip"/>
+</shape><!-- From: file:/C:/Users/mohan/Desktop/LearnMath/app/src/main/res/drawable/switch_back_dark.xml -->

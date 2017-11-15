@@ -42,10 +42,10 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getting values from shared preference
+        //Getting values from shared preference
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         fromFirstLaunch = prefs.getInt("fromFirstLaunch", 0);
-        //setting full screen when coach mark apears
+        //Setting full screen when coach mark apears
         if (fromFirstLaunch == 0) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -65,7 +65,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         btn_mult = (TextView) findViewById(R.id.btn_mult);
         btn_division = (TextView) findViewById(R.id.btn_division);
         rel_body = (RelativeLayout) findViewById(R.id.rel_body);
-        //getting the shared preference values
+        //Getting the shared preference values
         fromFirstLaunch = prefs.getInt("fromFirstLaunch", 0);
         if (fromFirstLaunch == 0) {
             rl_pager.setVisibility(View.VISIBLE);
@@ -74,7 +74,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             rl_pager.setVisibility(View.GONE);
         }
-        //viewpager fore coachmarks
+        //Viewpager fore coachmarks
         mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int arg0) {
@@ -101,7 +101,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
                 // TODO Auto-generated method stub
             }
         });
-        // onclicks for operations
+        // Onclicks for operations
         btn_plus.setOnClickListener(this);
         btn_minus.setOnClickListener(this);
         btn_mult.setOnClickListener(this);
@@ -118,7 +118,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        //onclicks for buttons
+        //Onclicks for buttons
         if (view.equals(btn_plus)) {
             tagValue = "add";
             moveToLearnFacts();
@@ -136,7 +136,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             moveToLearnFacts();
         }
     }
-    //moving to learnFacts screen
+    //Moving to learnFacts screen
 
     public void moveToLearnFacts() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -165,7 +165,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
 
         @Override
         public android.support.v4.app.Fragment getItem(int index) {
-            //for displaying coach marks
+            //For displaying coach marks
             switch (index) {
                 case 0:
                     return new CoachMarkerOne();
@@ -191,7 +191,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    //info dialog
+    //Info dialog
     public void showDialogInfo() {
 
         final Dialog dialog = new Dialog(this, R.style.DialogTheme);
@@ -201,7 +201,7 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
         TextView tv_body = (TextView) dialog.findViewById(R.id.tv_body);
         TextView txt_info_head = (TextView) dialog.findViewById(R.id.txt_info_head);
 
-        //setting font style for the textviews
+        //Setting font style for the textviews
         mfont.fontChange(txt_info_head, "fonts/textFont.ttf", LaunchActivity.this);
         mfont.fontChange(tv_head, "fonts/textFont.ttf", LaunchActivity.this);
         mfont.fontChange(tv_body, "fonts/textFont.ttf", LaunchActivity.this);

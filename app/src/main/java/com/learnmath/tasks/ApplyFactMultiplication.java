@@ -21,7 +21,7 @@ import com.learnmath.utils.FontChange;
 import java.util.Random;
 
 /**
- * Created by mohan on 10/13/2017.
+ * Created by stellent on 10/13/2017.
  */
 public class ApplyFactMultiplication {
     FontChange mfont = new FontChange();
@@ -40,7 +40,7 @@ public class ApplyFactMultiplication {
         this.context=context;
         Update();
     }
-    //calls this method when this class is called
+    //Calls this method when this class is called
     public void Update() {
         txt_borrow_four_mul = (TextView) ((Activity)context).findViewById(R.id.txt_borrow_four_mul);
         txt_borrow_three_mul = (TextView) ((Activity)context).findViewById(R.id.txt_borrow_three_mul);
@@ -128,7 +128,7 @@ public class ApplyFactMultiplication {
         mfont.fontChange(txt_final_result_seven_mul, "fonts/textFont.ttf", ((Activity) context));
 
     }
-    //genarate random number for multiplication
+    //generate random number for multiplication
     public void geanarateRandomApplyMul() {
         if(ApplyMath.fromFirst) {
             ApplyMath.fromFirst =false;
@@ -137,11 +137,11 @@ public class ApplyFactMultiplication {
             ApplyMath.countForPanda++;
         }
         mulClear=true;
-        //calling the panda for displaying the image
+        //Calling the panda for displaying the image
         if (ApplyMath.countForPanda == 5) {
             displayingPanda();
         }
-        //empty the views before setting the value
+        //Empty the views before setting the value
         txt_number_up_one_mul.setText("");
         txt_number_up_two_mul.setText("");
         txt_number_up_three_mul.setText("");
@@ -177,7 +177,7 @@ public class ApplyFactMultiplication {
         switch(mlevel){
 
             case 4:
-                //genarate random for level four
+                //Generate random for level four
                 mfirstRowRandomOneMul = genarateRandomrange(0, 9);
                 mfirstRowRandomTwoMul = genarateRandomrange(0, 9);
                 mfirstRowRandomThreeMul = genarateRandomrange(0, 9);
@@ -198,7 +198,7 @@ public class ApplyFactMultiplication {
                 break;
             default:
                 if(mlevel == 1 ){
-                //genarate random for level one and two
+                //Generate random for level one and two
                     mfirstRowRandomOneMul = genarateRandomrange(1, 6);
                     msecondRowRandomOneMul = genarateRandomrange(1,5);
                 txt_number_up_one_mul.setText(String.valueOf(mfirstRowRandomOneMul));
@@ -211,7 +211,7 @@ public class ApplyFactMultiplication {
                 txt_number_up_one_mul.setText(String.valueOf(mfirstRowRandomOneMul));
                 txt_number_bellow_one_mul.setText(String.valueOf(msecondRowRandomOneMul));
             }else if(mlevel == 3){
-                //genarate random for level three
+                //Generate random for level three
                     mfirstRowRandomOneMul = genarateRandomrange(0, 9);
                     mfirstRowRandomTwoMul = genarateRandomrange(0, 9);
                     mfirstRowRandomThreeMul = genarateRandom();
@@ -222,7 +222,7 @@ public class ApplyFactMultiplication {
                 txt_number_bellow_one_mul.setText(String.valueOf(msecondRowRandomOneMul));
             }
 
-                //increase the size of the textviews
+                //Increase the size of the textviews
                 txt_number_up_one_mul.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                         context.getResources().getDimension(R.dimen.text_size_two_apply_facts));
                 txt_number_up_two_mul.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -270,11 +270,11 @@ public class ApplyFactMultiplication {
         }
     }
 
-    //functionality for multiplication
+    //Functionality for multiplication
     public void functionalityforMul() {
         if(mulClear){
         String firstRowFirst_cal= String.valueOf(mfirstRowRandomOneMul * msecondRowRandomOneMul);
-        //checking conditions for multiplication
+        //Checking conditions for multiplication
         if(mlevel!=4) {
             if (txt_final_result_one_mul.getText().toString().equals("")) {
                 if (firstRowFirst_cal.length() == 2) {
@@ -300,7 +300,7 @@ public class ApplyFactMultiplication {
                             mediaService(R.raw.yes);
                         }
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 }
@@ -362,7 +362,7 @@ public class ApplyFactMultiplication {
                             mediaService(R.raw.yes);
                         }
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 }
@@ -379,7 +379,7 @@ public class ApplyFactMultiplication {
                         txt_result_one_mul_add.setText(seconChar);
                         mediaService(R.raw.yes);
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 } else if (firstRowFirst_cal.length() == 1) {
@@ -442,7 +442,7 @@ public class ApplyFactMultiplication {
                         txt_borrow_four_mul.setText(" ");
                         txt_bellow_one_mul_add.setVisibility(View.VISIBLE);
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 } else if (firstRowFourth_cal.length() == 1) {
@@ -455,7 +455,7 @@ public class ApplyFactMultiplication {
                         txt_borrow_four_mul.setText(" ");
                         txt_bellow_one_mul_add.setVisibility(View.VISIBLE);
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 }
@@ -469,7 +469,7 @@ public class ApplyFactMultiplication {
                         txt_bellow_two_mul_add.setText(secondRowFirst_cal);
                         mediaService(R.raw.yes);
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 }
@@ -526,7 +526,7 @@ public class ApplyFactMultiplication {
                         view_two_mul.setVisibility(View.VISIBLE);
                         rl_mul_final_result.setVisibility(View.VISIBLE);
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 } else if (secondRowFourth_cal.length() == 1) {
@@ -537,7 +537,7 @@ public class ApplyFactMultiplication {
                         rl_mul_final_result.setVisibility(View.VISIBLE);
                         mediaService(R.raw.yes);
                     } else {
-                        //media no
+                        //Media no
                         mediaService(R.raw.no);
                     }
                 }
@@ -547,7 +547,7 @@ public class ApplyFactMultiplication {
                     txt_final_result_one_mul.setText(finalResultMul_one);
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }else if(txt_final_result_two_mul.getText().toString().equals("")){
@@ -663,7 +663,7 @@ public class ApplyFactMultiplication {
         }
     }
     }
-// caliculation for one digit number
+// Calculation for one digit number
     private void caliculationForOneDigitResult(TextView txtOneDigitView, String finalResult) {
         if (ApplyMath.keyNum.equals(finalResult)) {
             txtOneDigitView.setText(finalResult);
@@ -673,13 +673,13 @@ public class ApplyFactMultiplication {
             mediaService(R.raw.no);
         }
     }
-// caliculation for one digit number after mlevel complete
+// Calculation for one digit number after mlevel complete
     private void caliculationForOneDigitSuccessResult(TextView txtOneDigitView, String finalResult) {
         txtOneDigitView.setText(finalResult);
         mediaService(R.raw.sucess);
         handlerForGenarateRandom();
     }
-// caliculation for two digit number after
+// Calculation for two digit number after
     private void caliculationForTwoDigitResult(TextView txtfirstView, TextView txtSecondView, String fianlString) {
         String firstChar = String.valueOf(fianlString.charAt(0));
         String seconChar = String.valueOf(fianlString.charAt(1));
@@ -690,12 +690,12 @@ public class ApplyFactMultiplication {
             txtSecondView.setText(seconChar);
             mediaService(R.raw.yes);
         } else {
-            //media no
+            //Media no
             mediaService(R.raw.no);
         }
 
     }
-// caliculation for two digit number after level complete
+// Calculation for two digit number after level complete
     private void caliculationForTwoDigitSuccessResult(TextView txtFirstView, TextView txtSecondView,String fianlString) {
         String firstChar = String.valueOf(fianlString.charAt(0));
         String seconChar = String.valueOf(fianlString.charAt(1));
@@ -713,7 +713,7 @@ public class ApplyFactMultiplication {
         }
     }
 
-    //genarating Random Number
+    //Generating Random Number
     public int genarateRandom() {
         int min = 1;
         int max = 9;
@@ -721,7 +721,7 @@ public class ApplyFactMultiplication {
         int ranOne = r.nextInt(max - min + 1) + min;
         return ranOne;
     }
-    //genarate random number between range
+    //Generate random number between range
     public int genarateRandomrange(int min,int max) {
 
         Random r = new Random();
@@ -730,7 +730,7 @@ public class ApplyFactMultiplication {
     }
 
 
-    //for playing the sounds
+    //For playing the sounds
     public void mediaService(int raw) {
 
         if(sound_share) {
@@ -760,7 +760,7 @@ public class ApplyFactMultiplication {
         }
     }
 
-    //functionality for displaying panda
+    //Functionality for displaying panda
     public void displayingPanda () {
         if (ApplyMath.forPanda_apply.equals("first")) {
             ApplyMath.forPanda_apply = "second";
@@ -775,7 +775,7 @@ public class ApplyFactMultiplication {
         }
     }
 
-// set visibility gone after after panda displaying
+// Set visibility gone after after panda displaying
 
     public void handlerForPanda(){
         Handler handler = new Handler();
@@ -789,7 +789,7 @@ public class ApplyFactMultiplication {
         }, 6000);
 
     }
-    //genarate random number after success
+    //Generate random number after success
     public void handlerForGenarateRandom(){
         mulClear=false;
         final Handler handler = new Handler();
@@ -800,7 +800,7 @@ public class ApplyFactMultiplication {
             }
         }, 1000);
     }
-    //setting visibility for the panda
+    //Setting visibility for the panda
     public void visiblePanda(int imgPanda){
         ApplyMath.countForPanda = 0;
         rl_panda.setVisibility(View.VISIBLE);

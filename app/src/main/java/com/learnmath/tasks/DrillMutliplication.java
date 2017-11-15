@@ -38,7 +38,7 @@ public class DrillMutliplication {
         this.context=context;
         Update();
     }
-    //calls this method when this class is called
+    //Calls this method when this class is called
     public void Update() {
         textview_mul_one = (TextView) ((Activity)context).findViewById(R.id.textview_mul_one);
         textview_mutli = (TextView) ((Activity)context).findViewById(R.id.textview_mutli);
@@ -48,7 +48,7 @@ public class DrillMutliplication {
         img_bomb= (ImageView) ((Activity)context).findViewById(R.id.img_bomb);
         rl_bomb = (RelativeLayout) ((Activity)context).findViewById(R.id.rl_bomb);
 
-        //setting font style for the textviews
+        //Setting font style for the textviews
         setFontStyle();
 
 
@@ -58,14 +58,14 @@ public class DrillMutliplication {
         mtextCount = prefs.getString("numberOfQuestions", "0");
     }
 
-    //setting font style for the textviews
+    //Setting font style for the textviews
     private void setFontStyle() {
         mfont.fontChange(textview_mul_one,"fonts/textFont.ttf",((Activity)context));
         mfont.fontChange(textview_mul_two,"fonts/textFont.ttf",((Activity)context));
         mfont.fontChange(textview_mul_result,"fonts/textFont.ttf",((Activity)context));
     }
 
-    //method for generating random numbers and setting the 2 random numbers to textviews
+    //Method for generating random numbers and setting the 2 random numbers to textviews
     public void RandomMethodForMultplication() {
         textview_mul_result.setText("");
         mfirstRowRandomOneMul =genarateRandom();
@@ -84,7 +84,7 @@ public class DrillMutliplication {
                     textview_mul_result.setText(mfirstCharMul);
                     mediaService(R.raw.yes);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             } else if (textview_mul_result.getText().toString().equals("") && firstRowFirst_cal.length() == 1) {
@@ -93,7 +93,7 @@ public class DrillMutliplication {
 
                     textview_mul_result.setText(firstRowFirst_cal);
 
-                    //for audible sound only first time
+                    //For audible sound only first time
                     if (sound) {
                         sound = false;
                         mediaService(R.raw.sucess);
@@ -104,7 +104,7 @@ public class DrillMutliplication {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //for increasing count and generate random number after click on write answer
+                            //For increasing count and generate random number after click on write answer
                             DrillAddition.text_int++;
                             Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
                             sound = true;
@@ -116,7 +116,7 @@ public class DrillMutliplication {
                     mediaService(R.raw.yes);
 
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
@@ -124,12 +124,12 @@ public class DrillMutliplication {
 
 
             if (firstRowFirst_cal.length() == 1) {
-                //no sound here
+                //No sound here
             } else {
                 if (Drill.keyNum.equals(mseconCharMul)) {
 
                     textview_mul_result.setText(firstRowFirst_cal);
-                    //for audible sound only first time
+                    //For audible sound only first time
                     if (textview_mul_result.getText().toString().length() == 2) {
                         if (sound) {
                             sound = false;
@@ -142,7 +142,7 @@ public class DrillMutliplication {
                         @Override
                         public void run() {
                             if (textview_mul_result.getText().toString().length() == 2) {
-                                //for increasing count and generate random number after click on write answer
+                                //For increasing count and generate random number after click on write answer
                                 DrillAddition.text_int++;
                                 Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
                                 sound=true;
@@ -151,13 +151,13 @@ public class DrillMutliplication {
                         }
                     }, 1000);
                 } else {
-                    //media no
+                    //Media no
                     mediaService(R.raw.no);
                 }
             }
         }
     }
-    //genarating Random Number
+    //Generating Random Number
     public int genarateRandom() {
         int min = 1;
         int max = 9;
@@ -166,7 +166,7 @@ public class DrillMutliplication {
         return ranOne;
     }
 
-    //for playing the sounds
+    //For playing the sounds
     public void mediaService(int raw) {
         if(msoundShare) {
             final MediaPlayer mp = MediaPlayer.create(context, raw);
