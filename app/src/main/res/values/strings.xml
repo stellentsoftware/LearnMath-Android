@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">LearnMath</string>
+    <string name="bullet"> \u2022</string>
+    <string name="slash">\\</string>
+
+
+    <string name="learn_facts_info">This app implements the Learn Math method. There are three phases: Learn the Math, Apply the Math, and Drill - with separate exercises for each. Swipe left and right to move between exercises. Within an exercise, swipe up and down to change operators.\n\n\nInfo buttons on each page will help to guide you.</string>
+    <string name="fluency_info">Solve the problems in this Drill as quickly as you can. Beat the timer and count of questions set in the Menu Options to \"win\".  Practicing with Fluency builds \'automaticity\' - the ability to just know the answer without having to think about it.</string>
+    <string name="apply_facts_info">After learning new Learn math we apply them solving problems. This embeds them into our memory.\nFollow the Facts -> Application -> Drill sequence.\n\nFor addition and multiplication problems the \"carry\" function is handled much the same way you would do it on paper.  Just enter the correct sequence of digits. Regrouping in subtraction is similar. Just enter the correct sequence of digits.</string>
+    <string name="longdiv_info">Enter digits in the proper sequence. No short cuts are allowed. Remember to provied remainders as needed.</string>
+    <string name="info_learn_head">Learn The Math</string>
+    <string name="info_apply_head">Apply The Math</string>
+    <string name="info_fluency_head">Drill</string>
+</resources>

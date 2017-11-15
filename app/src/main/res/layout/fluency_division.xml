@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_centerHorizontal="true"
+    android:gravity="center"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="180dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginRight="5dp"
+        android:id="@+id/ll_up_number1"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/textview_add_result1"
+            android:background="@drawable/rectangle"
+            android:textSize="@dimen/text_size_div_result"
+            android:textColor="@color/launch_app_bar"
+            android:visibility="invisible"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_width="@dimen/fluency_add_width"
+            android:layout_height="@dimen/fluency_Add_height" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/textview_div_result"
+            android:background="@drawable/rectangle"
+            android:textSize="@dimen/text_size_div_result"
+            android:textColor="@color/launch_app_bar"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_width="@dimen/fluency_div_width"
+            android:layout_height="@dimen/fluency_Add_height" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_marginRight="5dp"
+        android:id="@+id/ll_up_number"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/ll_up_number1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:id="@+id/textview_div_one"
+            android:textColor="@color/launch_app_bar"
+            android:textSize="@dimen/text_size_two_apply_facts"
+            android:text="2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/fluency_Add_height" />
+
+    <TextView
+            android:id="@+id/textview_div_two"
+            android:gravity="center"
+            android:background="@drawable/division_for_cal"
+            android:textColor="@color/launch_app_bar"
+            android:text="5"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_two_apply_facts"
+            android:layout_width="120dp"
+            android:layout_height="@dimen/fluency_Add_height" />
+
+
+
+    </LinearLayout>
+</RelativeLayout>
+    </RelativeLayout>

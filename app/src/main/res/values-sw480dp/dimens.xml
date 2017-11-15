@@ -1,0 +1,11 @@
+<resources>
+
+    <dimen name="textview_div_height">60dp</dimen>
+
+
+    <dimen name="text_size_div">30dp</dimen>
+    <dimen name="text_size_div_result">25dp</dimen>
+
+
+
+</resources>

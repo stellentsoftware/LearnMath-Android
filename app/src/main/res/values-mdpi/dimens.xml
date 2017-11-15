@@ -1,0 +1,7 @@
+<resources>
+
+    <dimen name="textview_div_height">60dp</dimen>
+
+    <dimen name="apply_div_key_height">100dp</dimen>
+    <dimen name="margin_switch">0dp</dimen>
+</resources>
