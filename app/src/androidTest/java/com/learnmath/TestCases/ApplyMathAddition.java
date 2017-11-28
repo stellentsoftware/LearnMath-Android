@@ -81,7 +81,7 @@ public class ApplyMathAddition {
         changeValues("8", "1");
         utils.keyBoardClick(2, 0);
         utils.keyBoardClick(3, 0);
-        utils.keyBoardClick(3, 0);
+        utils.keyBoardClick(4, 0);
         utils.keyBoardClick(4, 0);
         utils.keyBoardClick(0, 0);
         onView((utils.withIndex(withId(R.id.txt_result_one_add), 0))).check(matches(withText("0")));
