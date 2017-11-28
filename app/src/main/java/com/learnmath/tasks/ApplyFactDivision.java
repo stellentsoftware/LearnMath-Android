@@ -1,9 +1,8 @@
-package com.learnmath.tasks;
+package com.learnmath.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -14,8 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.learnmath.R;
-import com.learnmath.fragments.ApplyMath;
-import com.learnmath.utils.FontChange;
+import com.learnmath.Fragments.ApplyMath;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.Random;
 
@@ -27,10 +27,11 @@ public class ApplyFactDivision {
     public boolean msoundShare = false,mdivClear=true;
     int mlevel;
     View view_one,view_two,view_three,view_four;
+    Util util=new Util();
     TextView txt_pandatext,txt_quot_one,txt_quot_two,txt_quot_three,txt_quot_four,txt_quot_five,txt_quot_six,txt_divisor_two,txt_divisor_one,txt_divident_one,txt_divident_two,txt_divident_three,txt_divident_four
             ,txt_first_row_minus,txt_first_row_first_number,txt_third_first,txt_third_second,txt_fourth_minus,txt_fourth_first,txt_fourth_second,txt_fifth_first,txt_fifth_second,txt_fifth_third,txt_sixth_minus,txt_sixth_first,txt_sixth_second
             ,txt_sixth_third,txt_seventh_first,txt_seventh_second,txt_seventh_third,txt_eigth_minus,txt_eigth_first,txt_eigth_second,txt_eigth_third,txt_ninth_first,txt_ninth_second;
-    int mfirstRanNumDivisor,mranNumDivident,mDigitOne=0,mDigitTwo=0,mDigitThree=0,mDigitFour=0;
+    public int mfirstRanNumDivisor,mranNumDivident,mDigitOne=0,mDigitTwo=0,mDigitThree=0,mDigitFour=0;
     ImageView img_arrow_one,img_arrow_two,img_arrow_three,img_up_arrow,img_panda;
     RelativeLayout rl_panda;
     public static int sDigits = 0;
@@ -268,14 +269,14 @@ public class ApplyFactDivision {
                 }
                 if (txt_quot_one.getText().toString().equals(" ") && keyNum.equals(String.valueOf(mfirstQuotient))) {
                     txt_quot_one.setText(String.valueOf(mfirstQuotient));
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                 } else if (!txt_quot_one.getText().toString().equals(" ") && keyNum.equals(String.valueOf(mfirstResult))) {
                     txt_first_row_first_number.setText(String.valueOf(mfirstResult));
                     view_one.setVisibility(View.VISIBLE);
                     txt_first_row_minus.setVisibility(View.VISIBLE);
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                 } else {
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             } else if (txt_third_first.getText().toString().equals(" ")) {
                 int mfirstNumber = mDigitOne;
@@ -285,17 +286,17 @@ public class ApplyFactDivision {
                     txt_third_first.setText(String.valueOf(mresult));
                     if (sDigits == 1) {
                         if (mresult == 0) {
-                            mediaService(R.raw.sucess);
+                            util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                             handlerForGenarateRandom();
 
                         } else {
-                            mediaService(R.raw.yes);
+                            util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         }
                     } else {
-                        mediaService(R.raw.yes);
+                        util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     }
                 } else {
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             } else if (txt_third_second.getText().toString().equals(" ")) {
 
@@ -303,10 +304,10 @@ public class ApplyFactDivision {
                     if (keyNum.equals(String.valueOf(mDigitTwo))) {
                         img_arrow_one.setVisibility(View.INVISIBLE);
                         txt_third_second.setText(String.valueOf(mDigitTwo));
-                        mediaService(R.raw.yes);
+                        util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     } else {
                         img_arrow_one.setVisibility(View.VISIBLE);
-                        mediaService(R.raw.no);
+                        util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 } else {
                     if (txt_third_first.getText().toString() == "0") {
@@ -317,20 +318,20 @@ public class ApplyFactDivision {
                                 mremainder = true;
                                 img_up_arrow.setVisibility(View.INVISIBLE);
                                 txt_quot_two.setText("r.");
-                                mediaService(R.raw.yes);
+                                util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                             } else {
                                 img_up_arrow.setVisibility(View.VISIBLE);
-                                mediaService(R.raw.no);
+                                util.mediaService(((Activity) context),R.raw.no,msoundShare);
                             }
                         } else {
-                            String remain = txt_third_first.getText().toString();
-                            if (keyNum.equals(remain)) {
-                                txt_quot_three.setText(remain);
-                                mediaService(R.raw.sucess);
+                            String remainingValue = txt_third_first.getText().toString();
+                            if (keyNum.equals(remainingValue)) {
+                                txt_quot_three.setText(remainingValue);
+                                util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                                 handlerForGenarateRandom();
 
                             } else {
-                                mediaService(R.raw.no);
+                                util.mediaService(((Activity) context),R.raw.no,msoundShare);
                             }
                         }
                     }
@@ -376,18 +377,18 @@ public class ApplyFactDivision {
                     txt_fifth_second.setText(String.valueOf(mfirstResultSub));
                     if (sDigits == 2) {
                         if (mfirstResultSub == 0) {
-                            mediaService(R.raw.sucess);
+                            util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                             handlerForGenarateRandom();
 
                         } else {
-                            mediaService(R.raw.yes);
+                            util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         }
                     } else {
-                        mediaService(R.raw.yes);
+                        util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     }
                 } else if (!txt_fifth_second.getText().toString().equals(" ") && msecondResultSub != 0 && keyNum.equals(String.valueOf(msecondResultSub))) {
                     txt_fifth_second.setText(String.valueOf(msecondResultSub));
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                 } else {
                     int sum = mfirstResultSub + msecondResultSub;
                     if (sum > mfirstRanNumDivisor) {
@@ -397,11 +398,11 @@ public class ApplyFactDivision {
                             if (sDigits > 2) {
                                 if (keyNum.equals(String.valueOf(mDigitThree))) {
                                     txt_fifth_third.setText(String.valueOf(mDigitThree));
-                                    mediaService(R.raw.yes);
+                                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                                     img_arrow_two.setVisibility(View.INVISIBLE);
                                 } else {
                                     img_arrow_two.setVisibility(View.VISIBLE);
-                                    mediaService(R.raw.no);
+                                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                                 }
                             } else {
                                 if (txt_fifth_second.getText().toString() == "0") {
@@ -412,26 +413,26 @@ public class ApplyFactDivision {
                                             mremainder = true;
                                             img_up_arrow.setVisibility(View.INVISIBLE);
                                             txt_quot_three.setText("r.");
-                                            mediaService(R.raw.yes);
+                                            util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                                         } else {
                                             img_up_arrow.setVisibility(View.VISIBLE);
-                                            mediaService(R.raw.no);
+                                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                                         }
                                     } else {
-                                        String remain = txt_fifth_second.getText().toString();
-                                        if (keyNum.equals(remain)) {
-                                            mediaService(R.raw.sucess);
-                                            txt_quot_four.setText(remain);
+                                        String remainingValue = txt_fifth_second.getText().toString();
+                                        if (keyNum.equals(remainingValue)) {
+                                            util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
+                                            txt_quot_four.setText(remainingValue);
                                             handlerForGenarateRandom();
 
                                         } else {
-                                            mediaService(R.raw.no);
+                                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                                         }
                                     }
                                 }
                             }
                         } else {
-                            mediaService(R.raw.no);
+                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                         }
                     }
                 }
@@ -474,16 +475,16 @@ public class ApplyFactDivision {
                 if (txt_seventh_second.getText().toString().equals(" ") & keyNum.equals(String.valueOf(mfirstResultSub))) {
                     txt_seventh_second.setText(String.valueOf(mfirstResultSub));
                     if (sDigits == 3) {
-                        mediaService(R.raw.sucess);
+                        util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                         if (mfirstResultSub == 0) {
                             handlerForGenarateRandom();
                         }
                     } else {
-                        mediaService(R.raw.yes);
+                        util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     }
                 } else if (!txt_seventh_second.getText().toString().equals(" ") && msecondResultSub != 0 && keyNum.equals(String.valueOf(msecondResultSub))) {
                     txt_seventh_third.setText(String.valueOf(msecondResultSub));
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                 } else {
                     int msum = mfirstResultSub + msecondResultSub;
                     if (msum > mfirstRanNumDivisor) {
@@ -493,11 +494,11 @@ public class ApplyFactDivision {
                             if (sDigits > 3) {
                                 if (keyNum.equals(String.valueOf(mDigitFour))) {
                                     txt_seventh_third.setText(String.valueOf(mDigitFour));
-                                    mediaService(R.raw.yes);
+                                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                                     img_arrow_three.setVisibility(View.INVISIBLE);
                                 } else {
                                     img_arrow_three.setVisibility(View.VISIBLE);
-                                    mediaService(R.raw.no);
+                                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                                 }
                             } else {
 
@@ -508,26 +509,26 @@ public class ApplyFactDivision {
                                         if (keyNum.equals("r")) {
                                             mremainder = true;
                                             img_up_arrow.setVisibility(View.INVISIBLE);
-                                            mediaService(R.raw.yes);
+                                            util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                                             txt_quot_four.setText("r.");
                                         } else {
                                             img_up_arrow.setVisibility(View.VISIBLE);
-                                            mediaService(R.raw.no);
+                                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                                         }
                                     } else {
-                                        String remain = txt_seventh_second.getText().toString();
-                                        if (keyNum.equals(remain)) {
-                                            txt_quot_five.setText(remain);
-                                            mediaService(R.raw.sucess);
+                                        String remainingValue = txt_seventh_second.getText().toString();
+                                        if (keyNum.equals(remainingValue)) {
+                                            txt_quot_five.setText(remainingValue);
+                                            util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                                             handlerForGenarateRandom();
                                         } else {
-                                            mediaService(R.raw.no);
+                                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                                         }
                                     }
                                 }
                             }
                         } else {
-                            mediaService(R.raw.no);
+                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                         }
                     }
                 }
@@ -568,24 +569,24 @@ public class ApplyFactDivision {
                         txt_ninth_second.setText(String.valueOf(mfirstResultSub));
                         if (sDigits == 4) {
                             if (mfirstResultSub == 0) {
-                                mediaService(R.raw.sucess);
+                                util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                                 handlerForGenarateRandom();
 
                             } else {
-                                mediaService(R.raw.yes);
+                                util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                             }
                         } else {
-                            mediaService(R.raw.yes);
+                            util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         }
                     } else {
                         txt_ninth_first.setText(String.valueOf(mfirstResultSub));
-                        mediaService(R.raw.yes);
+                        util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     }
                 } else if (!txt_ninth_first.getText().toString().equals(" ") && msecondResultSub != 0 && keyNum.equals(String.valueOf(msecondResultSub))) {
                     txt_ninth_second.setText(String.valueOf(msecondResultSub));
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                 } else {
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
 
             } else if (!txt_ninth_second.getText().toString().equals(" ")) {
@@ -597,19 +598,19 @@ public class ApplyFactDivision {
                             mremainder = true;
                             img_up_arrow.setVisibility(View.INVISIBLE);
                             txt_quot_five.setText("r.");
-                            mediaService(R.raw.yes);
+                            util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         } else {
                             img_up_arrow.setVisibility(View.VISIBLE);
-                            mediaService(R.raw.no);
+                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                         }
                     } else {
-                        String remain = txt_ninth_second.getText().toString();
-                        if (keyNum.equals(remain)) {
-                            txt_quot_six.setText(remain);
-                            mediaService(R.raw.sucess);
+                        String remainderValue = txt_ninth_second.getText().toString();
+                        if (keyNum.equals(remainderValue)) {
+                            txt_quot_six.setText(remainderValue);
+                            util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                             handlerForGenarateRandom();
                         } else {
-                            mediaService(R.raw.no);
+                            util.mediaService(((Activity) context),R.raw.no,msoundShare);
                         }
                     }
                 }
@@ -621,16 +622,16 @@ public class ApplyFactDivision {
     private void caliculationForTheDivision(TextView txtQuotatoion, TextView txtRowValueSecond, TextView txtRowValueFirst, String keyNum, View view, TextView txtMinus, int msecondQuotient, int msecondResult) {
         if (txtQuotatoion.getText().toString().equals(" ") && keyNum.equals(String.valueOf(msecondQuotient))) {
             txtQuotatoion.setText(String.valueOf(msecondQuotient));
-            mediaService(R.raw.yes);
+            util.mediaService(((Activity) context),R.raw.yes,msoundShare);
         } else if (!txtQuotatoion.getText().toString().equals(" ")) {
             if (String.valueOf(msecondResult).length() == 1 && keyNum.equals(String.valueOf(msecondResult))) {
                 if (keyNum.equals(String.valueOf(msecondResult))) {
                     txtRowValueSecond.setText(String.valueOf(msecondResult));
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     txtMinus.setVisibility(View.VISIBLE);
                     view.setVisibility(View.VISIBLE);
                 } else {
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             } else if (String.valueOf(msecondResult).length() == 2) {
                 String firstChar = String.valueOf(String.valueOf(msecondResult).charAt(0));
@@ -638,66 +639,37 @@ public class ApplyFactDivision {
                 if (txtRowValueFirst.getText().toString().equals(" ") && keyNum.equals(firstChar)) {
                     txtMinus.setVisibility(View.VISIBLE);
                     txtRowValueFirst.setText(firstChar);
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                 } else if (!txtRowValueFirst.getText().toString().equals(" ") && keyNum.equals(seconChar)) {
                     txtRowValueSecond.setText(String.valueOf(seconChar));
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     view.setVisibility(View.VISIBLE);
                 } else {
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             } else {
-                mediaService(R.raw.no);
+                util.mediaService(((Activity) context),R.raw.no,msoundShare);
             }
         } else {
-            mediaService(R.raw.no);
-        }
-    }
-
-
-    //For playing the sounds
-    public void mediaService(int raw) {
-        if(msoundShare) {
-            final MediaPlayer mp = MediaPlayer.create(context, raw);
-            try {
-                if (mp.isPlaying()) {
-//                mp.release();
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-//                mp.start();
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-                        }
-
-                        ;
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            util.mediaService(((Activity) context),R.raw.no,msoundShare);
         }
     }
 
     //For displaying the panda
     public void displayingPanda () {
-
-        if (ApplyMath.forPanda_apply.equals("first")) {
-            ApplyMath.forPanda_apply = "second";
-            visiblePanda(R.drawable.panda_one);
-        } else if (ApplyMath.forPanda_apply.equals("second")) {
-            ApplyMath.forPanda_apply = "third";
-            visiblePanda(R.drawable.panda_two);
-        } else if (ApplyMath.forPanda_apply.equals("third")) {
-            ApplyMath.forPanda_apply = "first";
-            visiblePanda(R.drawable.panda_three);
+        switch (ApplyMath.forPandaApply){
+            case "first":
+                ApplyMath.forPandaApply = "second";
+                visiblePanda(R.drawable.panda_one);
+                break;
+            case "second":
+                ApplyMath.forPandaApply = "third";
+                visiblePanda(R.drawable.panda_two);
+                break;
+            case "third":
+                ApplyMath.forPandaApply = "first";
+                visiblePanda(R.drawable.panda_three);
+                break;
         }
     }
     //Visibility for the panda image

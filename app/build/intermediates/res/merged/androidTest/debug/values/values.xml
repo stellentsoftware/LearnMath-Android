@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/C:/Users/mohan/Desktop/LearnMath/app/build/intermediates/exploded-aar/com.android.support.test/rules/0.5/res/values/values.xml -->
-    <eat-comment/>
-    <string name="app_name">Test-api</string>
-</resources>

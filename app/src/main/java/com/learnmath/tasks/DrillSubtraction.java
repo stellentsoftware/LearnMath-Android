@@ -1,9 +1,8 @@
-package com.learnmath.tasks;
+package com.learnmath.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -12,15 +11,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.learnmath.R;
-import com.learnmath.fragments.ApplyMath;
-import com.learnmath.fragments.Drill;
-import com.learnmath.utils.FontChange;
+import com.learnmath.Fragments.Drill;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.Random;
 
 public class DrillSubtraction {
     public  int mfirstRanNumSub,mfifthRanNumSub;
-
     public boolean msoundShare = false;
     String mtextCount;
     SharedPreferences prefs;
@@ -30,6 +28,7 @@ public class DrillSubtraction {
     private TextView textview_sub_one,textview_plus,textview_sub_two,txt_equal_to;
     public Context context;
     FontChange mfont = new FontChange();
+    Util util = new Util();
 
 
     //Constructor to get views
@@ -56,7 +55,7 @@ public class DrillSubtraction {
         mfont.fontChange(textview_sub_result,"fonts/textFont.ttf",((Activity)context));
     }
 
-    //for generating random numbers for perform subtraction
+    //For generating random numbers for perform subtraction
     public void RandomMethodForSubtraction() {
         //empty the views before setting the value
         textview_sub_result.setText("");
@@ -78,52 +77,24 @@ public class DrillSubtraction {
         if (textview_sub_result.getText().toString().equals("")) {
             if (Drill.keyNum.equals(String.valueOf(Integer.parseInt(textview_sub_one.getText().toString()) - Integer.parseInt(textview_sub_two.getText().toString())))) {
                 textview_sub_result.setText(Drill.keyNum);
-                mediaService(R.raw.sucess);
+                util.mediaService(((Activity) context), R.raw.sucess, msoundShare);
+
 
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //for increasing count and generate random number after click on write answer
-                        DrillAddition.text_int++;
-                        Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
+                        //For increasing count and generate random number after click on write answer
+                        DrillAddition.textInt++;
+                        Drill.textview_count.setText(DrillAddition.textInt + "/" + mtextCount);
                         RandomMethodForSubtraction();
 
                     }
                 }, 1000);
 
             } else {
-                mediaService(R.raw.no);
-            }
-        }
-    }
+                util.mediaService(((Activity) context), R.raw.no, msoundShare);
 
-    //Sounds for click media service
-    public void mediaService(int raw) {
-        if(msoundShare) {
-            final MediaPlayer mp = MediaPlayer.create(context, raw);
-            try {
-                if (mp.isPlaying()) {
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-
-                        }
-
-                        ;
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }

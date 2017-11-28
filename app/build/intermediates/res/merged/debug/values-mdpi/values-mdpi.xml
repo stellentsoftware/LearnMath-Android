@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/C:/Users/mohan/Desktop/LearnMath/app/src/main/res/values-mdpi/dimens.xml -->
-    <eat-comment/>
-    <dimen name="apply_div_key_height">100dp</dimen>
-    <dimen name="margin_switch">0dp</dimen>
-    <dimen name="textview_div_height">60dp</dimen>
-</resources>

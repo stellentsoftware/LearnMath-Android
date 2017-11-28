@@ -1,9 +1,8 @@
-package com.learnmath.tasks;
+package com.learnmath.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.widget.ImageView;
@@ -11,8 +10,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.learnmath.R;
-import com.learnmath.fragments.Drill;
-import com.learnmath.utils.FontChange;
+import com.learnmath.Fragments.Drill;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.Random;
 
@@ -34,6 +34,7 @@ public class DrillDivision {
     int rand;
     TextView textview_div_one,textview_mutli,textview_div_two,txt_equal_to;
     public Context context;
+    Util util =new Util();
     public DrillDivision(Context context){
         this.context=context;
         Update();
@@ -59,9 +60,9 @@ public class DrillDivision {
     //Setting font style for the textviews
     private void setFontStyle() {
 
-        mfont.fontChange(textview_div_one,"fonts/textFont.ttf",((Activity)context));
+        mfont.fontChange(textview_div_one, "fonts/textFont.ttf", ((Activity) context));
         mfont.fontChange(textview_div_two,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(textview_div_result,"fonts/textFont.ttf",((Activity)context));
+        mfont.fontChange(textview_div_result, "fonts/textFont.ttf", ((Activity) context));
     }
 
     //Method for generating random numbers and setting the 2 random numbers to textviews
@@ -73,28 +74,26 @@ public class DrillDivision {
 
     //Code for division functinality
     public void functionalityforDivFluency() {
-        String firstRowFirst_cal = String.valueOf(mdivUp / mdivDown);
+        String mfirstRowFirstCal = String.valueOf(mdivUp / mdivDown);
         if (textview_div_result.getText().toString().equals("")) {
-            if (firstRowFirst_cal.length() == 2) {
-                mfirstCharDiv = String.valueOf(firstRowFirst_cal.charAt(0));
-                mseconCharDiv = String.valueOf(firstRowFirst_cal.charAt(1));
+            if (mfirstRowFirstCal.length() == 2) {
+                mfirstCharDiv = String.valueOf(mfirstRowFirstCal.charAt(0));
+                mseconCharDiv = String.valueOf(mfirstRowFirstCal.charAt(1));
                 if (textview_div_result.getText().toString().equals("") && Drill.keyNum.equals(mfirstCharDiv)) {
                     textview_div_result.setText(mfirstCharDiv);
-                    //Media yes
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity)context),R.raw.no,msoundShare);
+                   util.mediaService(((Activity)context),R.raw.yes,msoundShare);
 
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                   util.mediaService(((Activity)context),R.raw.no,msoundShare);
                 }
 
-            } else if (textview_div_result.getText().toString().equals("") && firstRowFirst_cal.length() == 1) {
-                if (Drill.keyNum.equals(firstRowFirst_cal)) {
-                    textview_div_result.setText(firstRowFirst_cal);
-                    //Media success
+            } else if (textview_div_result.getText().toString().equals("") && mfirstRowFirstCal.length() == 1) {
+                if (Drill.keyNum.equals(mfirstRowFirstCal)) {
+                    textview_div_result.setText(mfirstRowFirstCal);
                     if (msound) {
                         msound = false;
-                        mediaService(R.raw.sucess);
+                       util.mediaService(((Activity)context),R.raw.sucess,msoundShare);
                     }
 
                     final Handler handler = new Handler();
@@ -102,29 +101,27 @@ public class DrillDivision {
                         @Override
                         public void run() {
                             //For increasing count and generate random number after click on write answer
-                            DrillAddition.text_int++;
-                            Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
+                            DrillAddition.textInt++;
+                            Drill.textview_count.setText(DrillAddition.textInt + "/" + mtextCount);
                             msound=true;
                             RandomMethodForDivision();
                         }
                     }, 1000);
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                   util.mediaService(((Activity)context),R.raw.no,msoundShare);
                 }
             }
         } else if (!textview_div_result.getText().toString().equals("")) {
-            if (firstRowFirst_cal.length()==1) {
+            if (mfirstRowFirstCal.length()==1) {
                 //No sound here
             } else {
                 if (Drill.keyNum.equals(mseconCharDiv)) {
-                    textview_div_result.setText(firstRowFirst_cal);
+                    textview_div_result.setText(mfirstRowFirstCal);
                     //For audible sound only first time
                     if (textview_div_result.getText().toString().length() == 2) {
                         if (msound) {
                             msound = false;
-                            //Media success
-                            mediaService(R.raw.sucess);
+                           util.mediaService(((Activity)context),R.raw.sucess,msoundShare);
                         }
                     }
 
@@ -134,16 +131,15 @@ public class DrillDivision {
                         public void run() {
                             if (textview_div_result.getText().toString().length() == 2) {
                                 //For increasing count and generate random number after click on write answer
-                                DrillAddition.text_int++;
-                                Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
+                                DrillAddition.textInt++;
+                                Drill.textview_count.setText(DrillAddition.textInt + "/" + mtextCount);
                                 msound=true;
                                 RandomMethodForDivision();
                             }
                         }
                     }, 1000);
                 }else{
-                    //Media no
-                    mediaService(R.raw.no);
+                   util.mediaService(((Activity)context),R.raw.no,msoundShare);
                 }
             }
         }
@@ -164,8 +160,8 @@ public class DrillDivision {
         Random r = new Random();
         int Low = 1;
         int High = 99;
-        int randomNumber_high = r.nextInt(High-Low+1)+Low;
-        int ranTwo =  r.nextInt(High - randomNumber_high + 1) + randomNumber_high;
+        int randomNumberHigh = r.nextInt(High-Low+1)+Low;
+        int ranTwo =  r.nextInt(High - randomNumberHigh + 1) + randomNumberHigh;
 
         //Condition for perfect division
         if(mrandomNumber<=ranTwo) {
@@ -180,32 +176,4 @@ public class DrillDivision {
     }
 
 
-    //For playing the sounds
-    public void mediaService(int raw) {
-        if(msoundShare) {
-            final MediaPlayer mp = MediaPlayer.create(context, raw);
-            try {
-                if (mp.isPlaying()) {
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-                        }
-
-                        ;
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

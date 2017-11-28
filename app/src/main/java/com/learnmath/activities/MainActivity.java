@@ -1,4 +1,4 @@
-package com.learnmath.activities;
+package com.learnmath.Activities;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -10,8 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.learnmath.R;
-import com.learnmath.fragments.LearnMath;
-import com.learnmath.fragments.Settings;
+import com.learnmath.Fragments.LearnMath;
+import com.learnmath.Fragments.Settings;
 
 /**
  * Created by stellentsoft on 10/4/2017.

@@ -1,4 +1,4 @@
-package com.learnmath.utils;
+package com.learnmath.Utils;
 
 import android.app.Activity;
 import android.graphics.Typeface;

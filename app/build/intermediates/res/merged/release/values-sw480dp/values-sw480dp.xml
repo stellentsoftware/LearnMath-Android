@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/C:/Users/mohan/Desktop/LearnMath/app/src/main/res/values-sw480dp/dimens.xml -->
-    <eat-comment/>
-    <dimen name="text_size_div">30dp</dimen>
-    <dimen name="text_size_div_result">25dp</dimen>
-    <dimen name="textview_div_height">60dp</dimen>
-</resources>

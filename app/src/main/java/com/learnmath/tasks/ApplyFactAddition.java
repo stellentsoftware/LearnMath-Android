@@ -1,9 +1,8 @@
-package com.learnmath.tasks;
+package com.learnmath.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -14,8 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.learnmath.R;
-import com.learnmath.fragments.ApplyMath;
-import com.learnmath.utils.FontChange;
+import com.learnmath.Fragments.ApplyMath;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.Random;
 
@@ -25,11 +25,12 @@ import java.util.Random;
 public class ApplyFactAddition {
     Context context;
     int mranNumOne,mranNumTwo;
+    Util util=new Util();
     public boolean msoundShare = false,madditionClear=true;
     ImageView img_panda;
     RelativeLayout rl_panda;
     FontChange mfont=new FontChange();
-    private int mfirstRanNumAdd,msecondRanNumAdd,mthirdRanNumAdd,mfourthRanNumAdd,mfifthRanNumAdd,msixthRanNumAdd,mlevel;
+    public int mfirstRanNumAdd,msecondRanNumAdd,mthirdRanNumAdd,mfourthRanNumAdd,mfifthRanNumAdd,msixthRanNumAdd,mlevel;
     private TextView txt_result_five_add,txt_pandatext,txt_number_bellow_four_add,txt_number_bellow_three_add,txt_result_four_add,txt_result_three_add,txt_result_two_add,txt_result_one_add,txt_borrow_four_add,txt_borrow_three_add,txt_borrow_two_add,txt_borrow_one_add,txt_number_up_one_add,txt_number_up_two_add,txt_number_up_three_add,txt_number_up_four_add,txt_number_bellow_two_add,txt_number_bellow_one_add;
     public ApplyFactAddition(Context context){
         this.context=context;
@@ -66,26 +67,25 @@ public class ApplyFactAddition {
         mlevel = Integer.parseInt(prefs.getString("level", "1"));
         msoundShare = prefs.getBoolean("sound", true);
     }
-
+    //Set the font style to the textviews
     private void setFontStyle() {
         mfont.fontChange(txt_number_up_one_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_number_up_two_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_number_up_three_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_number_up_four_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_number_bellow_two_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_number_bellow_one_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_borrow_one_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_borrow_two_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_borrow_three_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_borrow_four_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_result_one_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_result_two_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_result_three_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_result_four_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_result_five_add,"fonts/textFont.ttf",((Activity)context));
-        mfont.fontChange(txt_number_bellow_three_add,"fonts/textFont.ttf",((Activity)context));
+        mfont.fontChange(txt_number_up_two_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_number_up_three_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_number_up_four_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_number_bellow_two_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_number_bellow_one_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_borrow_one_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_borrow_two_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_borrow_three_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_borrow_four_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_result_one_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_result_two_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_result_three_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_result_four_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_result_five_add, "fonts/textFont.ttf", ((Activity) context));
+        mfont.fontChange(txt_number_bellow_three_add, "fonts/textFont.ttf", ((Activity) context));
         mfont.fontChange(txt_number_bellow_four_add,"fonts/textFont.ttf",((Activity)context));
-
     }
 
     //Generate random number for addition
@@ -174,20 +174,20 @@ public class ApplyFactAddition {
         }
     }
     //Functionality for addition
-    public void functionalityforAdd(int mlevel) {
+    public void functionalityforAdd(String keyNum) {
         if(madditionClear) {
             if (txt_result_one_add.getText().toString().equals("")) {
                 String first_column_result = String.valueOf(mfirstRanNumAdd + mfifthRanNumAdd);
                 if (first_column_result.length() == 2) {
                     if (mlevel == 1 || mlevel == 2) {
-                        caliculationForTwoDigitMulSuccess(txt_result_two_add,txt_result_one_add,first_column_result);
+                        caliculationForTwoDigitMulSuccess(txt_result_two_add,txt_result_one_add,first_column_result,keyNum);
 
                     } else {
-                        caliculationForTwoDigitMulResult(txt_borrow_two_add, txt_result_one_add, first_column_result);
+                        caliculationForTwoDigitMulResult(txt_borrow_two_add, txt_result_one_add, first_column_result,keyNum);
                     }
                 } else if (first_column_result.length() == 1) {
 
-                    if (ApplyMath.keyNum.equals(first_column_result)) {
+                    if (keyNum.equals(first_column_result)) {
                         if (mlevel == 1 || mlevel == 2) {
                             caliculationOneDigitMulSucceess(txt_result_one_add, first_column_result);
 
@@ -195,8 +195,7 @@ public class ApplyFactAddition {
                             caliculationOneDigitMulResult(txt_result_one_add, first_column_result);
                         }
                     } else {
-                        //media no
-                        mediaService(R.raw.no);
+                        util.mediaService(((Activity)context),R.raw.no,msoundShare);
                     }
                 }
             } else if (txt_result_two_add.getText().toString().equals("")) {
@@ -209,20 +208,20 @@ public class ApplyFactAddition {
                 String second_column_result = String.valueOf(msecondRanNumAdd + msixthRanNumAdd + mborrow);
                 if (second_column_result.length() == 2) {
                     if (mlevel == 2) {
-                        caliculationForTwoDigitMulSuccess(txt_result_three_add,txt_result_two_add,second_column_result);
+                        caliculationForTwoDigitMulSuccess(txt_result_three_add,txt_result_two_add,second_column_result,keyNum);
                     } else {
-                        caliculationForTwoDigitMulResult(txt_borrow_three_add, txt_result_two_add, second_column_result);
+                        caliculationForTwoDigitMulResult(txt_borrow_three_add, txt_result_two_add, second_column_result,keyNum);
                     }
                 } else if (second_column_result.length() == 1) {
-                    if (ApplyMath.keyNum.equals(second_column_result)) {
+                    if (keyNum.equals(second_column_result)) {
                         if (mlevel == 2) {
                             caliculationOneDigitMulSucceess(txt_result_two_add, second_column_result);
                         } else {
                             caliculationOneDigitMulResult(txt_result_two_add, second_column_result);
                         }
                     } else {
-                        //media no
-                        mediaService(R.raw.no);
+
+                        util.mediaService(((Activity)context),R.raw.no,msoundShare);
                     }
                 }
             } else if (txt_result_three_add.getText().toString().equals("")) {
@@ -235,20 +234,19 @@ public class ApplyFactAddition {
                 String third_column_result = String.valueOf(mthirdRanNumAdd + mborrow);
                 if (third_column_result.length() == 2) {
                     if (mlevel == 3) {
-                        caliculationForTwoDigitMulSuccess(txt_result_four_add,txt_result_three_add,third_column_result);
+                        caliculationForTwoDigitMulSuccess(txt_result_four_add,txt_result_three_add,third_column_result,keyNum);
                     } else {
-                        caliculationForTwoDigitMulResult(txt_borrow_four_add, txt_result_three_add, third_column_result);
+                        caliculationForTwoDigitMulResult(txt_borrow_four_add, txt_result_three_add, third_column_result,keyNum);
                     }
                 } else if (third_column_result.length() == 1) {
-                    if (ApplyMath.keyNum.equals(third_column_result)) {
+                    if (keyNum.equals(third_column_result)) {
                         if (mlevel == 3) {
                             caliculationOneDigitMulSucceess(txt_result_three_add, third_column_result);
                         } else {
                             caliculationOneDigitMulResult(txt_result_three_add,third_column_result);
                         }
                     } else {
-                        //media no
-                        mediaService(R.raw.no);
+                        util.mediaService(((Activity)context),R.raw.no,msoundShare);
                     }
                 }
             } else if (txt_result_four_add.getText().toString().equals("")) {
@@ -261,15 +259,14 @@ public class ApplyFactAddition {
                 String fourth_column_result = String.valueOf(mfourthRanNumAdd + mborrow);
                 if (fourth_column_result.length() == 2) {
                     if (mlevel == 4) {
-                        caliculationForTwoDigitMulSuccess(txt_result_five_add,txt_result_four_add,fourth_column_result);
+                        caliculationForTwoDigitMulSuccess(txt_result_five_add,txt_result_four_add,fourth_column_result,keyNum);
                     }
                 } else if (fourth_column_result.length() == 1) {
 
-                    if (ApplyMath.keyNum.equals(fourth_column_result)) {
+                    if (keyNum.equals(fourth_column_result)) {
                         caliculationOneDigitMulSucceess(txt_result_four_add, fourth_column_result);
                     } else {
-                        //media no
-                        mediaService(R.raw.no);
+                        util.mediaService(((Activity)context),R.raw.no,msoundShare);
                     }
                 }
             }
@@ -278,43 +275,41 @@ public class ApplyFactAddition {
     //Calculation for one digit number
     private void caliculationOneDigitMulResult(TextView txtFirstView, String finalResult) {
         txtFirstView.setText(finalResult);
-        mediaService(R.raw.yes);
+        util.mediaService(((Activity) context), R.raw.yes, msoundShare);
     }
     //Calculation for One digit number when level complet
     private void caliculationOneDigitMulSucceess(TextView txtFirstView, String finalResult) {
         txtFirstView.setText(finalResult);
-        mediaService(R.raw.sucess);
+        util.mediaService(((Activity)context),R.raw.sucess,msoundShare);
         handlerForGenarateRandom();
     }
     //Calculation for two digit number
-    private void caliculationForTwoDigitMulResult(TextView txtFirstView, TextView txtSecondView, String finalResult) {
+    private void caliculationForTwoDigitMulResult(TextView txtFirstView, TextView txtSecondView, String finalResult,String keyNum) {
         String firstChar = String.valueOf(finalResult.charAt(0));
         String seconChar = String.valueOf(finalResult.charAt(1));
-        if (txtFirstView.getText().toString().equals(" ") && ApplyMath.keyNum.equals(firstChar)) {
+        if (txtFirstView.getText().toString().equals(" ") && keyNum.equals(firstChar)) {
             txtFirstView.setText(firstChar);
-            mediaService(R.raw.yes);
-        } else if (!txtFirstView.getText().toString().equals(" ") && ApplyMath.keyNum.equals(seconChar)) {
+            util.mediaService(((Activity)context),R.raw.yes,msoundShare);
+        } else if (!txtFirstView.getText().toString().equals(" ") && keyNum.equals(seconChar)) {
             txtSecondView.setText(seconChar);
-            mediaService(R.raw.yes);
+            util.mediaService(((Activity) context), R.raw.yes, msoundShare);
         } else {
-            //Media no
-            mediaService(R.raw.no);
+            util.mediaService(((Activity)context),R.raw.no,msoundShare);
         }
     }
     //Calculation for two digit number when level complet
-    private void caliculationForTwoDigitMulSuccess(TextView txtFirstView, TextView txtSecondView, String finalResult) {
+    private void caliculationForTwoDigitMulSuccess(TextView txtFirstView, TextView txtSecondView, String finalResult,String keyNum) {
         String firstChar = String.valueOf(finalResult.charAt(0));
         String seconChar = String.valueOf(finalResult.charAt(1));
-        if (txtFirstView.getText().toString().equals("") && ApplyMath.keyNum.equals(firstChar)) {
+        if (txtFirstView.getText().toString().equals("") && keyNum.equals(firstChar)) {
             txtFirstView.setText(firstChar);
-            mediaService(R.raw.yes);
-        } else if (!txtFirstView.getText().toString().equals("") && ApplyMath.keyNum.equals(seconChar)) {
+            util.mediaService(((Activity)context),R.raw.yes,msoundShare);
+        } else if (!txtFirstView.getText().toString().equals("") && keyNum.equals(seconChar)) {
             txtSecondView.setText(seconChar);
-            mediaService(R.raw.sucess);
+            util.mediaService(((Activity)context),R.raw.sucess,msoundShare);
             handlerForGenarateRandom();
         } else {
-            //Media no
-            mediaService(R.raw.no);
+            util.mediaService(((Activity)context),R.raw.no,msoundShare);
         }
     }
 
@@ -341,49 +336,23 @@ public class ApplyFactAddition {
         mranNumTwo =  r.nextInt(max - mranNumOne + 1) + mranNumOne;
         return mranNumOne;
     }
-    //For playing the sounds
-    public void mediaService(int raw) {
-        if(msoundShare) {
-            final MediaPlayer mp = MediaPlayer.create(context, raw);
-            try {
-                if (mp.isPlaying()) {
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-
-                        }
-
-                        ;
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     //For displaying the panda after every five successful answers
     public void displayingPanda () {
 
-        if (ApplyMath.forPanda_apply.equals("first")) {
-            ApplyMath.forPanda_apply = "second";
-            visiblePanda(R.drawable.panda_one);
-        } else if (ApplyMath.forPanda_apply.equals("second")) {
-            ApplyMath.forPanda_apply = "third";
-            visiblePanda(R.drawable.panda_two);
-        } else if (ApplyMath.forPanda_apply.equals("third")) {
-            ApplyMath.forPanda_apply = "first";
-            visiblePanda(R.drawable.panda_three);
-
+        switch (ApplyMath.forPandaApply){
+            case "first":
+                ApplyMath.forPandaApply = "second";
+                visiblePanda(R.drawable.panda_one);
+                break;
+            case "second":
+                ApplyMath.forPandaApply = "third";
+                visiblePanda(R.drawable.panda_two);
+                break;
+            case "third":
+                ApplyMath.forPandaApply = "first";
+                visiblePanda(R.drawable.panda_three);
+                break;
         }
     }
 
@@ -420,6 +389,4 @@ public class ApplyFactAddition {
         Glide.with(context).load(imgPanda).into(imageViewTarget);
         refreshTheItems();
     }
-
-
 }

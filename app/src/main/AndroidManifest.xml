@@ -11,7 +11,7 @@
         android:hardwareAccelerated="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.learnmath.activities.LaunchActivity"
+        <activity android:name="com.learnmath.Activities.LaunchActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.learnmath.activities.MainActivity"
+        <activity android:name="com.learnmath.Activities.MainActivity"
             android:screenOrientation="portrait"/>
 
     </application>

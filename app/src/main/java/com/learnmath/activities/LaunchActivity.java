@@ -1,9 +1,8 @@
-package com.learnmath.activities;
+package com.learnmath.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
@@ -20,12 +19,12 @@ import android.widget.TextView;
 
 import com.learnmath.R;
 
-import com.learnmath.couchMark.CoachMarkerFour;
-import com.learnmath.couchMark.CoachMarkerOne;
-import com.learnmath.couchMark.CoachMarkerThree;
-import com.learnmath.couchMark.CoachMarkerTwo;
-import com.learnmath.fragments.Drill;
-import com.learnmath.utils.FontChange;
+import com.learnmath.CouchMark.CouchMarkerFour;
+import com.learnmath.CouchMark.CouchMarkerOne;
+import com.learnmath.CouchMark.CouchMarkerThree;
+import com.learnmath.CouchMark.CouchMarkerTwo;
+import com.learnmath.Fragments.Drill;
+import com.learnmath.Utils.FontChange;
 
 public class LaunchActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView img_rotate;
@@ -168,13 +167,13 @@ public class LaunchActivity extends AppCompatActivity implements View.OnClickLis
             //For displaying coach marks
             switch (index) {
                 case 0:
-                    return new CoachMarkerOne();
+                    return new CouchMarkerOne();
                 case 1:
-                    return new CoachMarkerTwo();
+                    return new CouchMarkerTwo();
                 case 2:
-                    return new CoachMarkerThree();
+                    return new CouchMarkerThree();
                 case 3:
-                    return new CoachMarkerFour();
+                    return new CouchMarkerFour();
             }
             return null;
         }

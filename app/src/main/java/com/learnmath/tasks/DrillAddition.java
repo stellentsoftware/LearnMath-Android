@@ -1,9 +1,8 @@
-package com.learnmath.tasks;
+package com.learnmath.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -12,8 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.learnmath.R;
-import com.learnmath.fragments.Drill;
-import com.learnmath.utils.FontChange;
+import com.learnmath.Fragments.Drill;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.Random;
 
@@ -27,13 +27,14 @@ public class DrillAddition {
     Context context;
     public boolean msoundshare = false,msound=true;
     String mtextCount;
-    public static int text_int;
+    public static int textInt;
     public static TextView textview_add_result;
     ImageView img_bomb;
     RelativeLayout rl_bomb;
-    private int firstRanNum_add,fifthRanNum_add;
+    public int mfirstRanNumAdd,mfifthRanNumAdd;
     private TextView textview_add_one,textview_plus,textview_add_two,txt_equal_to;
     FontChange mfont = new FontChange();
+    Util util =new Util();
 
     public DrillAddition(Context context){
         this.context=context;
@@ -65,11 +66,11 @@ public class DrillAddition {
     //Method for generating random numbers and setting the 2 random numbers to textviews
     public void RandomMethodForAddition() {
         textview_add_result.setText("");
-        firstRanNum_add = genarateRandom();
-        fifthRanNum_add= genarateRandom();
-        textview_add_one.setText(String.valueOf(firstRanNum_add));
+        mfirstRanNumAdd = genarateRandom();
+        mfifthRanNumAdd= genarateRandom();
+        textview_add_one.setText(String.valueOf(mfirstRanNumAdd));
         textview_plus.setVisibility(View.VISIBLE);
-        textview_add_two.setText(String.valueOf(fifthRanNum_add));
+        textview_add_two.setText(String.valueOf(mfifthRanNumAdd));
         txt_equal_to.setVisibility(View.VISIBLE);
     }
 
@@ -85,11 +86,9 @@ public class DrillAddition {
                 mseconChar = String.valueOf(mfirstColumnResult.charAt(1));
                 if (textview_add_result.getText().toString().equals("") && Drill.keyNum.equals(mfirstChar)) {
                     textview_add_result.setText(mfirstChar);
-                    //Media yes
-                    mediaService(R.raw.yes);
+                     util.mediaService(((Activity) context), R.raw.yes, msoundshare);
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                     util.mediaService(((Activity) context),R.raw.no,msoundshare);
                 }
 
             } else if (textview_add_result.getText().toString().equals("") && mfirstColumnResult.length() == 1) {
@@ -98,23 +97,22 @@ public class DrillAddition {
                     final Handler handler = new Handler();
                     if (msound) {
                         msound = false;
-                        mediaService(R.raw.sucess);
+                         util.mediaService(((Activity) context), R.raw.sucess,msoundshare);
                     }
 
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             //For increasing count and generate random number after click on write answer
-                            text_int++;
-                            Drill.textview_count.setText(text_int + "/" + mtextCount);
+                            textInt++;
+                            Drill.textview_count.setText(textInt + "/" + mtextCount);
                             msound=true;
                             RandomMethodForAddition();
                         }
                     }, 1000);
 
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                     util.mediaService(((Activity) context),R.raw.no,msoundshare);
                 }
             }
         } else if (!textview_add_result.getText().toString().equals("")) {
@@ -128,7 +126,7 @@ public class DrillAddition {
                     if (textview_add_result.getText().toString().length() == 2) {
                         if (msound) {
                             msound = false;
-                            mediaService(R.raw.sucess);
+                             util.mediaService(((Activity) context), R.raw.sucess,msoundshare);
                         }
                     }
 
@@ -137,8 +135,8 @@ public class DrillAddition {
                         public void run() {
                             if (textview_add_result.getText().toString().length() == 2) {
                                 //For increasing count and generate random number after click on write answer
-                                text_int++;
-                                Drill.textview_count.setText(text_int + "/" + mtextCount);
+                                textInt++;
+                                Drill.textview_count.setText(textInt + "/" + mtextCount);
                                 msound = true;
                                 RandomMethodForAddition();
                             }
@@ -146,8 +144,7 @@ public class DrillAddition {
                     }, 1000);
 
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                     util.mediaService(((Activity) context),R.raw.no,msoundshare);
                 }
             }
         }
@@ -162,33 +159,4 @@ public class DrillAddition {
         return ranOne;
     }
 
-    //For playing the sounds
-    public void mediaService(int raw) {
-        if(msoundshare) {
-            final MediaPlayer mp = MediaPlayer.create(context, raw);
-            try {
-                if (mp.isPlaying()) {
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-
-                        }
-
-                        ;
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

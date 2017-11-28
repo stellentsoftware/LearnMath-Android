@@ -1,9 +1,8 @@
-package com.learnmath.tasks;
+package com.learnmath.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.widget.ImageView;
@@ -11,8 +10,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.learnmath.R;
-import com.learnmath.fragments.Drill;
-import com.learnmath.utils.FontChange;
+import com.learnmath.Fragments.Drill;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.Random;
 
@@ -33,6 +33,7 @@ public class DrillMutliplication {
     TextView textview_mul_one,textview_mutli,textview_mul_two,txt_equal_to;
     private boolean sound=true;
     FontChange mfont = new FontChange();
+    Util util = new Util();
 
     public DrillMutliplication(Context context){
         this.context=context;
@@ -75,28 +76,27 @@ public class DrillMutliplication {
     }
     //Multiplication functionality
     public void functionalityforMulFluency() {
-        String firstRowFirst_cal = String.valueOf(Integer.parseInt(textview_mul_one.getText().toString()) * Integer.parseInt(textview_mul_two.getText().toString()));        //checking conditions for multiplication
+        String mfirstRowFirstCal = String.valueOf(Integer.parseInt(textview_mul_one.getText().toString()) * Integer.parseInt(textview_mul_two.getText().toString()));        //checking conditions for multiplication
         if (textview_mul_result.getText().toString().equals("")) {
-            if (firstRowFirst_cal.length() == 2) {
-                mfirstCharMul = String.valueOf(firstRowFirst_cal.charAt(0));
-                mseconCharMul = String.valueOf(firstRowFirst_cal.charAt(1));
+            if (mfirstRowFirstCal.length() == 2) {
+                mfirstCharMul = String.valueOf(mfirstRowFirstCal.charAt(0));
+                mseconCharMul = String.valueOf(mfirstRowFirstCal.charAt(1));
                 if (textview_mul_result.getText().toString().equals("") && Drill.keyNum.equals(mfirstCharMul)) {
                     textview_mul_result.setText(mfirstCharMul);
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context), R.raw.yes, msoundShare);
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
-            } else if (textview_mul_result.getText().toString().equals("") && firstRowFirst_cal.length() == 1) {
+            } else if (textview_mul_result.getText().toString().equals("") && mfirstRowFirstCal.length() == 1) {
 
-                if (Drill.keyNum.equals(firstRowFirst_cal)) {
+                if (Drill.keyNum.equals(mfirstRowFirstCal)) {
 
-                    textview_mul_result.setText(firstRowFirst_cal);
+                    textview_mul_result.setText(mfirstRowFirstCal);
 
                     //For audible sound only first time
                     if (sound) {
                         sound = false;
-                        mediaService(R.raw.sucess);
+                        util.mediaService(((Activity) context), R.raw.sucess,msoundShare);
                     }
 
 
@@ -105,35 +105,34 @@ public class DrillMutliplication {
                         @Override
                         public void run() {
                             //For increasing count and generate random number after click on write answer
-                            DrillAddition.text_int++;
-                            Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
+                            DrillAddition.textInt++;
+                            Drill.textview_count.setText(DrillAddition.textInt + "/" + mtextCount);
                             sound = true;
                             RandomMethodForMultplication();
 
                         }
                     }, 1000);
 
-                    mediaService(R.raw.yes);
+                    util.mediaService(((Activity) context),R.raw.yes,msoundShare);
 
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             }
         } else if (!textview_mul_result.getText().toString().equals("")) {
 
 
-            if (firstRowFirst_cal.length() == 1) {
+            if (mfirstRowFirstCal.length() == 1) {
                 //No sound here
             } else {
                 if (Drill.keyNum.equals(mseconCharMul)) {
 
-                    textview_mul_result.setText(firstRowFirst_cal);
+                    textview_mul_result.setText(mfirstRowFirstCal);
                     //For audible sound only first time
                     if (textview_mul_result.getText().toString().length() == 2) {
                         if (sound) {
                             sound = false;
-                            mediaService(R.raw.sucess);
+                            util.mediaService(((Activity) context), R.raw.sucess,msoundShare);
                         }
                     }
 
@@ -143,16 +142,15 @@ public class DrillMutliplication {
                         public void run() {
                             if (textview_mul_result.getText().toString().length() == 2) {
                                 //For increasing count and generate random number after click on write answer
-                                DrillAddition.text_int++;
-                                Drill.textview_count.setText(DrillAddition.text_int + "/" + mtextCount);
+                                DrillAddition.textInt++;
+                                Drill.textview_count.setText(DrillAddition.textInt + "/" + mtextCount);
                                 sound=true;
                                 RandomMethodForMultplication();
                             }
                         }
                     }, 1000);
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                    util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             }
         }
@@ -166,34 +164,4 @@ public class DrillMutliplication {
         return ranOne;
     }
 
-    //For playing the sounds
-    public void mediaService(int raw) {
-        if(msoundShare) {
-            final MediaPlayer mp = MediaPlayer.create(context, raw);
-            try {
-                if (mp.isPlaying()) {
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-
-                        }
-
-                        ;
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 }

@@ -1,11 +1,11 @@
-package com.learnmath.tasks;
+package com.learnmath.Tasks;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,8 +15,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.learnmath.R;
-import com.learnmath.fragments.ApplyMath;
-import com.learnmath.utils.FontChange;
+import com.learnmath.Fragments.ApplyMath;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.Random;
 
@@ -25,8 +26,9 @@ import java.util.Random;
  */
 public class ApplyFactMultiplication {
     FontChange mfont = new FontChange();
-    public boolean sound_share = false,mulClear=true;
-    int mlevel;
+    Util util=new Util();
+    public boolean msoundShare = false,mulClear=true;
+    public int mlevel;
     ImageView img_panda;
     View view_two_mul;
     RelativeLayout rl_mul_final_result,rl_for_four_digits,rl_panda;
@@ -34,7 +36,7 @@ public class ApplyFactMultiplication {
             ,txt_result_two_mul_add,txt_result_three_mul_add,txt_borrow_three_mul_add,txt_result_four_mul_add,txt_borrow_four_mul_add,txt_result_five_mul_add,txt_borrow_five_mul_add
             ,txt_bellow_two_mul_add,txt_bellow_three_mul_add,txt_bellow_four_mul_add,txt_bellow_five_mul_add,txt_bellow_six_mul_add,txt_final_result_one_mul,txt_final_result_two_mul
             ,txt_final_result_three_mul,txt_final_result_four_mul,txt_final_result_five_mul,txt_final_result_six_mul,txt_final_result_seven_mul,txt_bellow_one_mul_add,txt_bellow_seven_mul_add;
-    private int mfirstRowRandomOneMul,mfirstRowRandomTwoMul,mfirstRowRandomThreeMul,mfirstRowRandomFourMul,msecondRowRandomOneMul,msecondRowRandomTwoMul;
+    public int mfirstRowRandomOneMul,mfirstRowRandomTwoMul,mfirstRowRandomThreeMul,mfirstRowRandomFourMul,msecondRowRandomOneMul,msecondRowRandomTwoMul;
     Context context;
     public ApplyFactMultiplication(Context context){
         this.context=context;
@@ -87,7 +89,7 @@ public class ApplyFactMultiplication {
         rl_panda =  (RelativeLayout) ((Activity)context).findViewById(R.id.rl_panda);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         mlevel = Integer.parseInt(prefs.getString("level", "1"));
-        sound_share = prefs.getBoolean("sound", true);
+        msoundShare = prefs.getBoolean("sound", true);
    }
    //Setting font style for the text views
     private void setFontStyle() {
@@ -271,37 +273,38 @@ public class ApplyFactMultiplication {
     }
 
     //Functionality for multiplication
-    public void functionalityforMul() {
+    public void functionalityforMul(String keyNum) {
+        Log.e("random values"+mfirstRowRandomOneMul+msecondRowRandomOneMul,"res");
         if(mulClear){
-        String firstRowFirst_cal= String.valueOf(mfirstRowRandomOneMul * msecondRowRandomOneMul);
+        String mfirstRowFirstCal= String.valueOf(mfirstRowRandomOneMul * msecondRowRandomOneMul);
+            Log.e("random values"+mfirstRowRandomOneMul+msecondRowRandomOneMul,"res"+mfirstRowFirstCal);
         //Checking conditions for multiplication
         if(mlevel!=4) {
             if (txt_final_result_one_mul.getText().toString().equals("")) {
-                if (firstRowFirst_cal.length() == 2) {
+                if (mfirstRowFirstCal.length() == 2) {
 
                     if (mlevel == 1 || mlevel == 2) {
-                        caliculationForTwoDigitSuccessResult(txt_final_result_two_mul, txt_final_result_one_mul, firstRowFirst_cal);
+                        caliculationForTwoDigitSuccessResult(txt_final_result_two_mul, txt_final_result_one_mul, mfirstRowFirstCal,keyNum);
 
                     }  else {
-                        caliculationForTwoDigitResult(txt_borrow_two_mul,txt_final_result_one_mul,firstRowFirst_cal);
+                        caliculationForTwoDigitResult(txt_borrow_two_mul,txt_final_result_one_mul,mfirstRowFirstCal,keyNum);
 
                     }
-                } else if (firstRowFirst_cal.length() == 1) {
-                    if (ApplyMath.keyNum.equals(firstRowFirst_cal)) {
+                } else if (mfirstRowFirstCal.length() == 1) {
+                    if (keyNum.equals(mfirstRowFirstCal)) {
                         if (mlevel == 1 || mlevel ==2) {
-                            caliculationForOneDigitSuccessResult(txt_final_result_one_mul, firstRowFirst_cal);
+                            caliculationForOneDigitSuccessResult(txt_final_result_one_mul, mfirstRowFirstCal);
 
-                            txt_final_result_one_mul.setText(firstRowFirst_cal);
-                            mediaService(R.raw.sucess);
+                            txt_final_result_one_mul.setText(mfirstRowFirstCal);
+                           util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                             handlerForGenarateRandom();
 
                         }  else {
-                            txt_final_result_one_mul.setText(firstRowFirst_cal);
-                            mediaService(R.raw.yes);
+                            txt_final_result_one_mul.setText(mfirstRowFirstCal);
+                           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         }
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 }
             } else if(txt_final_result_two_mul.getText().toString().equals("")) {
@@ -311,28 +314,27 @@ public class ApplyFactMultiplication {
                 } else {
                     mborrow = Integer.parseInt(txt_borrow_two_mul.getText().toString());
                 }
-                String firstRowSecond_cal = String.valueOf(msecondRowRandomOneMul * mfirstRowRandomTwoMul + mborrow);
-                if (firstRowSecond_cal.length() == 2) {
+                String mfirstRowSecondCal = String.valueOf(msecondRowRandomOneMul * mfirstRowRandomTwoMul + mborrow);
+                if (mfirstRowSecondCal.length() == 2) {
 
                     if (mlevel == 2) {
-                        caliculationForTwoDigitSuccessResult(txt_final_result_three_mul, txt_final_result_two_mul, firstRowSecond_cal);
+                        caliculationForTwoDigitSuccessResult(txt_final_result_three_mul, txt_final_result_two_mul, mfirstRowSecondCal,keyNum);
 
 
                     }  else {
-                        caliculationForTwoDigitResult(txt_borrow_three_mul,txt_final_result_two_mul,firstRowSecond_cal);
+                        caliculationForTwoDigitResult(txt_borrow_three_mul,txt_final_result_two_mul,mfirstRowSecondCal,keyNum);
                     }
-                } else if (firstRowSecond_cal.length() == 1) {
-                    if (ApplyMath.keyNum.equals(firstRowSecond_cal)) {
+                } else if (mfirstRowSecondCal.length() == 1) {
+                    if (keyNum.equals(mfirstRowSecondCal)) {
                         if (mlevel == 2) {
-                            caliculationForOneDigitSuccessResult(txt_final_result_three_mul, firstRowSecond_cal);
+                            caliculationForOneDigitSuccessResult(txt_final_result_three_mul, mfirstRowSecondCal);
                                                 }
                         else {
-                            txt_final_result_two_mul.setText(firstRowSecond_cal);
-                            mediaService(R.raw.yes);
+                            txt_final_result_two_mul.setText(mfirstRowSecondCal);
+                           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         }
                     } else {
-                        //media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 }
             }else if(txt_final_result_three_mul.getText().toString().equals("")){
@@ -342,48 +344,46 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_three_mul.getText().toString());
                 }
-                String firstRowThird_cal=String.valueOf(mfirstRowRandomThreeMul*msecondRowRandomOneMul+mborrow);
-                if (firstRowThird_cal.length() == 2) {
+                String mfirstRowThirdCal=String.valueOf(mfirstRowRandomThreeMul*msecondRowRandomOneMul+mborrow);
+                if (mfirstRowThirdCal.length() == 2) {
 
                     if(mlevel == 3){
-                        caliculationForTwoDigitSuccessResult(txt_final_result_four_mul, txt_final_result_three_mul, firstRowThird_cal);
+                        caliculationForTwoDigitSuccessResult(txt_final_result_four_mul, txt_final_result_three_mul, mfirstRowThirdCal,keyNum);
 
 
                     }else {
-                        caliculationForTwoDigitResult(txt_borrow_four_mul,txt_final_result_three_mul,firstRowThird_cal);
+                        caliculationForTwoDigitResult(txt_borrow_four_mul,txt_final_result_three_mul,mfirstRowThirdCal,keyNum);
 
                     }
-                } else if (firstRowThird_cal.length() == 1) {
-                    if (ApplyMath.keyNum.equals(firstRowThird_cal)) {
+                } else if (mfirstRowThirdCal.length() == 1) {
+                    if (keyNum.equals(mfirstRowThirdCal)) {
                         if(mlevel == 3){
-                            caliculationForOneDigitSuccessResult(txt_final_result_three_mul, firstRowThird_cal);
+                            caliculationForOneDigitSuccessResult(txt_final_result_three_mul, mfirstRowThirdCal);
                         }else {
-                            txt_final_result_three_mul.setText(firstRowThird_cal);
-                            mediaService(R.raw.yes);
+                            txt_final_result_three_mul.setText(mfirstRowThirdCal);
+                           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         }
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 }
            }
         }else{
             if (txt_result_one_mul_add.getText().toString().equals("")) {
-                if (firstRowFirst_cal.length() == 2) {
-                    String firstChar = String.valueOf(firstRowFirst_cal.charAt(0));
-                    String seconChar = String.valueOf(firstRowFirst_cal.charAt(1));
-                    if (txt_borrow_two_mul.getText().toString().equals(" ") && ApplyMath.keyNum.equals(firstChar)) {
+                if (mfirstRowFirstCal.length() == 2) {
+                    String firstChar = String.valueOf(mfirstRowFirstCal.charAt(0));
+                    String seconChar = String.valueOf(mfirstRowFirstCal.charAt(1));
+                    if (txt_borrow_two_mul.getText().toString().equals(" ") && keyNum.equals(firstChar)) {
                         txt_borrow_two_mul.setText(firstChar);
-                        mediaService(R.raw.yes);
-                    } else if (!txt_borrow_two_mul.getText().toString().equals(" ")&& ApplyMath.keyNum.equals(seconChar)) {
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
+                    } else if (!txt_borrow_two_mul.getText().toString().equals(" ")&& keyNum.equals(seconChar)) {
                         txt_result_one_mul_add.setText(seconChar);
-                        mediaService(R.raw.yes);
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
-                } else if (firstRowFirst_cal.length() == 1) {
-                    caliculationForOneDigitResult(txt_result_one_mul_add, firstRowFirst_cal);
+                } else if (mfirstRowFirstCal.length() == 1) {
+                    caliculationForOneDigitResult(txt_result_one_mul_add, mfirstRowFirstCal,keyNum);
 
 
                 }
@@ -394,13 +394,13 @@ public class ApplyFactMultiplication {
                 } else {
                     mborrow = Integer.parseInt(txt_borrow_two_mul.getText().toString());
                 }
-                String firstRowSecond_cal = String.valueOf(msecondRowRandomOneMul * mfirstRowRandomTwoMul + mborrow);
-                if (firstRowSecond_cal.length() == 2) {
+                String mfirstRowSecondCal = String.valueOf(msecondRowRandomOneMul * mfirstRowRandomTwoMul + mborrow);
+                if (mfirstRowSecondCal.length() == 2) {
 
-                    caliculationForTwoDigitResult(txt_borrow_three_mul,txt_result_two_mul_add,firstRowSecond_cal);
+                    caliculationForTwoDigitResult(txt_borrow_three_mul,txt_result_two_mul_add,mfirstRowSecondCal,keyNum);
 
-                } else if (firstRowSecond_cal.length() == 1) {
-                    caliculationForOneDigitResult(txt_result_two_mul_add, firstRowSecond_cal);
+                } else if (mfirstRowSecondCal.length() == 1) {
+                    caliculationForOneDigitResult(txt_result_two_mul_add, mfirstRowSecondCal,keyNum);
 
                 }
             }else if(txt_result_three_mul_add.getText().toString().equals("")){
@@ -410,13 +410,13 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_three_mul.getText().toString());
                 }
-                String firstRowThird_cal=String.valueOf(mfirstRowRandomThreeMul*msecondRowRandomOneMul+mborrow);
-                if (firstRowThird_cal.length() == 2) {
+                String mfirstRowThirdCal=String.valueOf(mfirstRowRandomThreeMul*msecondRowRandomOneMul+mborrow);
+                if (mfirstRowThirdCal.length() == 2) {
 
-                    caliculationForTwoDigitResult(txt_borrow_four_mul,txt_result_three_mul_add,firstRowThird_cal);
+                    caliculationForTwoDigitResult(txt_borrow_four_mul,txt_result_three_mul_add,mfirstRowThirdCal,keyNum);
 
-                } else if (firstRowThird_cal.length() == 1) {
-                    caliculationForOneDigitResult(txt_result_three_mul_add, firstRowThird_cal);
+                } else if (mfirstRowThirdCal.length() == 1) {
+                    caliculationForOneDigitResult(txt_result_three_mul_add, mfirstRowThirdCal,keyNum);
 
                 }
             }else if(txt_result_four_mul_add.getText().toString().equals("")){
@@ -426,51 +426,48 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_four_mul.getText().toString());
                 }
-                String firstRowFourth_cal=String.valueOf(mfirstRowRandomFourMul*msecondRowRandomOneMul+mborrow);
-                if (firstRowFourth_cal.length() == 2) {
-                    String firstChar = String.valueOf(firstRowFourth_cal.charAt(0));
-                    String seconChar = String.valueOf(firstRowFourth_cal.charAt(1));
-                    if (txt_result_five_mul_add.getText().toString().equals("") && ApplyMath.keyNum.equals(firstChar)) {
+                String mfirstRowFourthCal=String.valueOf(mfirstRowRandomFourMul*msecondRowRandomOneMul+mborrow);
+                if (mfirstRowFourthCal.length() == 2) {
+                    String firstChar = String.valueOf(mfirstRowFourthCal.charAt(0));
+                    String seconChar = String.valueOf(mfirstRowFourthCal.charAt(1));
+                    if (txt_result_five_mul_add.getText().toString().equals("") && keyNum.equals(firstChar)) {
                         txt_result_five_mul_add.setText(firstChar);
-                        mediaService(R.raw.yes);
-                    } else if (!txt_result_five_mul_add.getText().toString().equals("")&& ApplyMath.keyNum.equals(seconChar)) {
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
+                    } else if (!txt_result_five_mul_add.getText().toString().equals("")&& keyNum.equals(seconChar)) {
                         txt_result_four_mul_add.setText(seconChar);
-                        mediaService(R.raw.yes);
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         txt_borrow_one_mul.setText(" ");
                         txt_borrow_two_mul.setText(" ");
                         txt_borrow_three_mul.setText(" ");
                         txt_borrow_four_mul.setText(" ");
                         txt_bellow_one_mul_add.setVisibility(View.VISIBLE);
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
-                } else if (firstRowFourth_cal.length() == 1) {
-                    if (ApplyMath.keyNum.equals(firstRowFourth_cal)) {
-                        txt_result_four_mul_add.setText(firstRowFourth_cal);
-                        mediaService(R.raw.yes);
+                } else if (mfirstRowFourthCal.length() == 1) {
+                    if (keyNum.equals(mfirstRowFourthCal)) {
+                        txt_result_four_mul_add.setText(mfirstRowFourthCal);
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         txt_borrow_one_mul.setText(" ");
                         txt_borrow_two_mul.setText(" ");
                         txt_borrow_three_mul.setText(" ");
                         txt_borrow_four_mul.setText(" ");
                         txt_bellow_one_mul_add.setVisibility(View.VISIBLE);
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 }
             }else if(txt_bellow_two_mul_add.getText().toString().equals("")){
-                String secondRowFirst_cal=String.valueOf(mfirstRowRandomOneMul*msecondRowRandomTwoMul);
-                if (secondRowFirst_cal.length() == 2) {
-                  caliculationForTwoDigitResult(txt_borrow_two_mul,txt_bellow_two_mul_add,secondRowFirst_cal);
+                String msecondRowFirstCal=String.valueOf(mfirstRowRandomOneMul*msecondRowRandomTwoMul);
+                if (msecondRowFirstCal.length() == 2) {
+                  caliculationForTwoDigitResult(txt_borrow_two_mul,txt_bellow_two_mul_add,msecondRowFirstCal,keyNum);
 
-                } else if (secondRowFirst_cal.length() == 1) {
-                    if (ApplyMath.keyNum.equals(secondRowFirst_cal)) {
-                        txt_bellow_two_mul_add.setText(secondRowFirst_cal);
-                        mediaService(R.raw.yes);
+                } else if (msecondRowFirstCal.length() == 1) {
+                    if (keyNum.equals(msecondRowFirstCal)) {
+                        txt_bellow_two_mul_add.setText(msecondRowFirstCal);
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 }
             }else if(txt_bellow_three_mul_add.getText().toString().equals("")){
@@ -480,12 +477,12 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_two_mul.getText().toString());
                 }
-                String secondRowSecond_cal=String.valueOf(mfirstRowRandomTwoMul*msecondRowRandomTwoMul+mborrow);
-                if (secondRowSecond_cal.length() == 2) {
-                    caliculationForTwoDigitResult(txt_borrow_three_mul,txt_bellow_three_mul_add,secondRowSecond_cal);
+                String msecondRowSecondCal=String.valueOf(mfirstRowRandomTwoMul*msecondRowRandomTwoMul+mborrow);
+                if (msecondRowSecondCal.length() == 2) {
+                    caliculationForTwoDigitResult(txt_borrow_three_mul,txt_bellow_three_mul_add,msecondRowSecondCal,keyNum);
 
-                } else if (secondRowSecond_cal.length() == 1) {
-                    caliculationForOneDigitResult(txt_bellow_three_mul_add, secondRowSecond_cal);
+                } else if (msecondRowSecondCal.length() == 1) {
+                    caliculationForOneDigitResult(txt_bellow_three_mul_add, msecondRowSecondCal,keyNum);
 
                 }
 
@@ -496,12 +493,12 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_three_mul.getText().toString());
                 }
-                String secondRowThird_cal=String.valueOf(mfirstRowRandomThreeMul*msecondRowRandomTwoMul+mborrow);
-                if (secondRowThird_cal.length() == 2) {
-                    caliculationForTwoDigitResult(txt_borrow_four_mul,txt_bellow_four_mul_add,secondRowThird_cal);
+                String msecondRowThirdCal=String.valueOf(mfirstRowRandomThreeMul*msecondRowRandomTwoMul+mborrow);
+                if (msecondRowThirdCal.length() == 2) {
+                    caliculationForTwoDigitResult(txt_borrow_four_mul,txt_bellow_four_mul_add,msecondRowThirdCal,keyNum);
 
-                } else if (secondRowThird_cal.length() == 1) {
-                    caliculationForOneDigitResult(txt_bellow_four_mul_add, secondRowThird_cal);
+                } else if (msecondRowThirdCal.length() == 1) {
+                    caliculationForOneDigitResult(txt_bellow_four_mul_add, msecondRowThirdCal,keyNum);
 
                 }
             }else if(txt_bellow_five_mul_add.getText().toString().equals("")){
@@ -511,53 +508,50 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_four_mul.getText().toString());
                 }
-                String secondRowFourth_cal=String.valueOf(mfirstRowRandomFourMul*msecondRowRandomTwoMul+mborrow);
-                if (secondRowFourth_cal.length() == 2) {
+                String msecondRowFourthCal=String.valueOf(mfirstRowRandomFourMul*msecondRowRandomTwoMul+mborrow);
+                if (msecondRowFourthCal.length() == 2) {
 
-                    String firstChar = String.valueOf(secondRowFourth_cal.charAt(0));
-                    String seconChar = String.valueOf(secondRowFourth_cal.charAt(1));
-                    if (txt_bellow_six_mul_add.getText().toString().equals("") && ApplyMath.keyNum.equals(firstChar)) {
-                        mediaService(R.raw.yes);
+                    String firstChar = String.valueOf(msecondRowFourthCal.charAt(0));
+                    String seconChar = String.valueOf(msecondRowFourthCal.charAt(1));
+                    if (txt_bellow_six_mul_add.getText().toString().equals("") && keyNum.equals(firstChar)) {
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         txt_bellow_six_mul_add.setText(firstChar);
-                    } else if (!txt_bellow_six_mul_add.getText().toString().equals("")&& ApplyMath.keyNum.equals(seconChar)) {
-                        mediaService(R.raw.yes);
+                    } else if (!txt_bellow_six_mul_add.getText().toString().equals("")&& keyNum.equals(seconChar)) {
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         txt_bellow_five_mul_add.setText(seconChar);
                         txt_bellow_seven_mul_add.setVisibility(View.VISIBLE);
                         view_two_mul.setVisibility(View.VISIBLE);
                         rl_mul_final_result.setVisibility(View.VISIBLE);
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
-                } else if (secondRowFourth_cal.length() == 1) {
-                    if (ApplyMath.keyNum.equals(secondRowFourth_cal)) {
-                        txt_bellow_five_mul_add.setText(secondRowFourth_cal);
+                } else if (msecondRowFourthCal.length() == 1) {
+                    if (keyNum.equals(msecondRowFourthCal)) {
+                        txt_bellow_five_mul_add.setText(msecondRowFourthCal);
                         txt_bellow_seven_mul_add.setVisibility(View.VISIBLE);
                         view_two_mul.setVisibility(View.VISIBLE);
                         rl_mul_final_result.setVisibility(View.VISIBLE);
-                        mediaService(R.raw.yes);
+                       util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                     } else {
-                        //Media no
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 }
             }else if(txt_final_result_one_mul.getText().toString().equals("")){
-                String finalResultMul_one = txt_result_one_mul_add.getText().toString();
-                if(ApplyMath.keyNum.equals(finalResultMul_one)){
-                    txt_final_result_one_mul.setText(finalResultMul_one);
-                    mediaService(R.raw.yes);
+                String mfinalResultMulOne = txt_result_one_mul_add.getText().toString();
+                if(keyNum.equals(mfinalResultMulOne)){
+                    txt_final_result_one_mul.setText(mfinalResultMulOne);
+                   util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                 } else {
-                    //Media no
-                    mediaService(R.raw.no);
+                   util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             }else if(txt_final_result_two_mul.getText().toString().equals("")){
                 int getFirstNumber =Integer.parseInt(txt_result_two_mul_add.getText().toString());
                 int getSecondNumber = Integer.parseInt(txt_bellow_two_mul_add.getText().toString());
-                String final_for_second_digit_mul = String.valueOf(getFirstNumber + getSecondNumber);
-                if(final_for_second_digit_mul.length() == 2){
-                    caliculationForTwoDigitResult(txt_borrow_three_mul_add,txt_final_result_two_mul,final_for_second_digit_mul);
-                }else if(final_for_second_digit_mul.length() == 1){
-                    caliculationForOneDigitResult(txt_final_result_two_mul, final_for_second_digit_mul);
+                String mfinalForSecondDigitMul = String.valueOf(getFirstNumber + getSecondNumber);
+                if(mfinalForSecondDigitMul.length() == 2){
+                    caliculationForTwoDigitResult(txt_borrow_three_mul_add,txt_final_result_two_mul,mfinalForSecondDigitMul,keyNum);
+                }else if(mfinalForSecondDigitMul.length() == 1){
+                    caliculationForOneDigitResult(txt_final_result_two_mul, mfinalForSecondDigitMul,keyNum);
                 }
             }else if(txt_final_result_three_mul.getText().toString().equals("")){
                 int getFirstNumber =Integer.parseInt(txt_result_three_mul_add.getText().toString());
@@ -568,12 +562,12 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_three_mul_add.getText().toString());
                 }
-                String final_for_third_digit_mul = String.valueOf(getFirstNumber + getSecondNumber+mborrow);
-                if(final_for_third_digit_mul.length() == 2){
-                    caliculationForTwoDigitResult(txt_borrow_four_mul_add,txt_final_result_three_mul,final_for_third_digit_mul);
+                String mfinalForThirdDigitMul = String.valueOf(getFirstNumber + getSecondNumber+mborrow);
+                if(mfinalForThirdDigitMul.length() == 2){
+                    caliculationForTwoDigitResult(txt_borrow_four_mul_add,txt_final_result_three_mul,mfinalForThirdDigitMul,keyNum);
 
-                }else if(final_for_third_digit_mul.length() == 1){
-                    caliculationForOneDigitResult(txt_final_result_three_mul, final_for_third_digit_mul);
+                }else if(mfinalForThirdDigitMul.length() == 1){
+                    caliculationForOneDigitResult(txt_final_result_three_mul, mfinalForThirdDigitMul,keyNum);
                 }
             }else if(txt_final_result_four_mul.getText().toString().equals("")){
                 int getFirstNumber =Integer.parseInt(txt_result_four_mul_add.getText().toString());
@@ -584,12 +578,12 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_four_mul_add.getText().toString());
                 }
-                String final_for_fourth_digit_mul = String.valueOf(getFirstNumber + getSecondNumber+mborrow);
-                if(final_for_fourth_digit_mul.length() == 2){
-                    caliculationForTwoDigitResult(txt_borrow_five_mul_add,txt_final_result_four_mul,final_for_fourth_digit_mul);
+                String mfinalForFourthDigitMul = String.valueOf(getFirstNumber + getSecondNumber+mborrow);
+                if(mfinalForFourthDigitMul.length() == 2){
+                    caliculationForTwoDigitResult(txt_borrow_five_mul_add,txt_final_result_four_mul,mfinalForFourthDigitMul,keyNum);
 
-                }else if(final_for_fourth_digit_mul.length() == 1){
-                    caliculationForOneDigitResult(txt_final_result_four_mul, final_for_fourth_digit_mul);
+                }else if(mfinalForFourthDigitMul.length() == 1){
+                    caliculationForOneDigitResult(txt_final_result_four_mul, mfinalForFourthDigitMul,keyNum);
                 }
             }else if(txt_final_result_five_mul.getText().toString().equals("")){
                 int getFirstNumber =0;
@@ -605,29 +599,29 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_five_mul_add.getText().toString());
                 }
-                String final_for_fifth_digit_mul = String.valueOf(getFirstNumber + getSecondNumber+mborrow);
-                if(final_for_fifth_digit_mul.length() == 2){
+                String mfinalForFifthDigitMul = String.valueOf(getFirstNumber + getSecondNumber+mborrow);
+                if(mfinalForFifthDigitMul.length() == 2){
                     if(!txt_bellow_six_mul_add.getText().toString().equals("")) {
-                        caliculationForTwoDigitResult(txt_borrow_six_mul_add,txt_final_result_five_mul,final_for_fifth_digit_mul);
+                        caliculationForTwoDigitResult(txt_borrow_six_mul_add,txt_final_result_five_mul,mfinalForFifthDigitMul,keyNum);
 
                     }else{
-                        caliculationForTwoDigitSuccessResult(txt_final_result_six_mul, txt_final_result_five_mul,final_for_fifth_digit_mul);
+                        caliculationForTwoDigitSuccessResult(txt_final_result_six_mul, txt_final_result_five_mul,mfinalForFifthDigitMul,keyNum);
 
 
                     }
-                }else if(final_for_fifth_digit_mul.length() == 1){
-                    if(ApplyMath.keyNum.equals(final_for_fifth_digit_mul)){
+                }else if(mfinalForFifthDigitMul.length() == 1){
+                    if(keyNum.equals(mfinalForFifthDigitMul)){
                         if(!txt_bellow_six_mul_add.getText().toString().equals("")) {
-                            txt_final_result_five_mul.setText(final_for_fifth_digit_mul);
-                            mediaService(R.raw.yes);
+                            txt_final_result_five_mul.setText(mfinalForFifthDigitMul);
+                           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
                         }else {
-                            txt_final_result_five_mul.setText(final_for_fifth_digit_mul);
-                            mediaService(R.raw.sucess);
+                            txt_final_result_five_mul.setText(mfinalForFifthDigitMul);
+                           util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                             handlerForGenarateRandom();
 
                         }
                     }else{
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
                     }
                 }
             }else if(txt_final_result_six_mul.getText().toString().equals("")){
@@ -643,73 +637,70 @@ public class ApplyFactMultiplication {
                 }else {
                     mborrow = Integer.parseInt(txt_borrow_six_mul_add.getText().toString());
                 }
-                String final_for_six_digit_mul = String.valueOf( getSecondNumber+mborrow);
-                if(final_for_six_digit_mul.length() == 2){
-                    caliculationForTwoDigitSuccessResult(txt_final_result_seven_mul, txt_final_result_six_mul, final_for_six_digit_mul);
+                String mfinalForSixDigitMul = String.valueOf( getSecondNumber+mborrow);
+                if(mfinalForSixDigitMul.length() == 2){
+                    caliculationForTwoDigitSuccessResult(txt_final_result_seven_mul, txt_final_result_six_mul, mfinalForSixDigitMul,keyNum);
 
-                }else if(final_for_six_digit_mul.length() == 1){
-                    if(ApplyMath.keyNum.equals(final_for_six_digit_mul)){
-                        txt_final_result_six_mul.setText(final_for_six_digit_mul);
-                        mediaService(R.raw.sucess);
+                }else if(mfinalForSixDigitMul.length() == 1){
+                    if(keyNum.equals(mfinalForSixDigitMul)){
+                        txt_final_result_six_mul.setText(mfinalForSixDigitMul);
+                       util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
                         handlerForGenarateRandom();
                     }else{
-                        mediaService(R.raw.no);
+                       util.mediaService(((Activity) context),R.raw.no,msoundShare);
 
                     }
                 }else{
-                    mediaService(R.raw.no);
+                   util.mediaService(((Activity) context),R.raw.no,msoundShare);
                 }
             }
         }
     }
     }
 // Calculation for one digit number
-    private void caliculationForOneDigitResult(TextView txtOneDigitView, String finalResult) {
-        if (ApplyMath.keyNum.equals(finalResult)) {
+    private void caliculationForOneDigitResult(TextView txtOneDigitView, String finalResult,String keyNum) {
+        if (keyNum.equals(finalResult)) {
             txtOneDigitView.setText(finalResult);
-            mediaService(R.raw.yes);
+           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
         } else {
-            //media no
-            mediaService(R.raw.no);
+           util.mediaService(((Activity) context),R.raw.no,msoundShare);
         }
     }
 // Calculation for one digit number after mlevel complete
     private void caliculationForOneDigitSuccessResult(TextView txtOneDigitView, String finalResult) {
         txtOneDigitView.setText(finalResult);
-        mediaService(R.raw.sucess);
+       util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
         handlerForGenarateRandom();
     }
 // Calculation for two digit number after
-    private void caliculationForTwoDigitResult(TextView txtfirstView, TextView txtSecondView, String fianlString) {
+    private void caliculationForTwoDigitResult(TextView txtfirstView, TextView txtSecondView, String fianlString,String keyNum) {
         String firstChar = String.valueOf(fianlString.charAt(0));
         String seconChar = String.valueOf(fianlString.charAt(1));
-        if (txtfirstView.getText().toString().equals(" ") && ApplyMath.keyNum.equals(firstChar)) {
+        if (txtfirstView.getText().toString().equals(" ") && keyNum.equals(firstChar)) {
             txtfirstView.setText(firstChar);
-            mediaService(R.raw.yes);
-        } else if (!txtfirstView.getText().toString().equals(" ")&& ApplyMath.keyNum.equals(seconChar)) {
+           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
+        } else if (!txtfirstView.getText().toString().equals(" ")&& keyNum.equals(seconChar)) {
             txtSecondView.setText(seconChar);
-            mediaService(R.raw.yes);
+           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
         } else {
-            //Media no
-            mediaService(R.raw.no);
+           util.mediaService(((Activity) context),R.raw.no,msoundShare);
         }
 
     }
 // Calculation for two digit number after level complete
-    private void caliculationForTwoDigitSuccessResult(TextView txtFirstView, TextView txtSecondView,String fianlString) {
+    private void caliculationForTwoDigitSuccessResult(TextView txtFirstView, TextView txtSecondView,String fianlString,String keyNum) {
         String firstChar = String.valueOf(fianlString.charAt(0));
         String seconChar = String.valueOf(fianlString.charAt(1));
-        if (txtFirstView.getText().toString().equals("") && ApplyMath.keyNum.equals(firstChar)) {
+        if (txtFirstView.getText().toString().equals("") && keyNum.equals(firstChar)) {
             txtFirstView.setText(firstChar);
-            mediaService(R.raw.yes);
-        } else if (!txtFirstView.getText().toString().equals("")&& ApplyMath.keyNum.equals(seconChar)) {
+           util.mediaService(((Activity) context),R.raw.yes,msoundShare);
+        } else if (!txtFirstView.getText().toString().equals("")&& keyNum.equals(seconChar)) {
             txtSecondView.setText(seconChar);
-            mediaService(R.raw.sucess);
+           util.mediaService(((Activity) context),R.raw.sucess,msoundShare);
             handlerForGenarateRandom();
 
         } else {
-            //media no
-            mediaService(R.raw.no);
+           util.mediaService(((Activity) context),R.raw.no,msoundShare);
         }
     }
 
@@ -728,50 +719,21 @@ public class ApplyFactMultiplication {
         int ranOne = r.nextInt(max - min + 1) + min;
         return ranOne;
     }
-
-
-    //For playing the sounds
-    public void mediaService(int raw) {
-
-        if(sound_share) {
-            final MediaPlayer mp = MediaPlayer.create(context, raw);
-            try {
-                if (mp.isPlaying()) {
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-                        }
-
-                        ;
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     //Functionality for displaying panda
     public void displayingPanda () {
-        if (ApplyMath.forPanda_apply.equals("first")) {
-            ApplyMath.forPanda_apply = "second";
-            visiblePanda(R.drawable.panda_one);
-        } else if (ApplyMath.forPanda_apply.equals("second")) {
-            ApplyMath.forPanda_apply = "third";
-            visiblePanda(R.drawable.panda_two);
-            } else if (ApplyMath.forPanda_apply.equals("third")) {
-            ApplyMath.forPanda_apply = "first";
-            visiblePanda(R.drawable.panda_three);
-
+        switch (ApplyMath.forPandaApply){
+            case "first":
+                ApplyMath.forPandaApply = "second";
+                visiblePanda(R.drawable.panda_one);
+                break;
+            case "second":
+                ApplyMath.forPandaApply = "third";
+                visiblePanda(R.drawable.panda_two);
+                break;
+            case "third":
+                ApplyMath.forPandaApply = "first";
+                visiblePanda(R.drawable.panda_three);
+                break;
         }
     }
 

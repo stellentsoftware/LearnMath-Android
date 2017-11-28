@@ -1,15 +1,13 @@
-package com.learnmath.fragments;
+package com.learnmath.Fragments;
 
 
 import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -38,13 +36,13 @@ import com.github.jinatonic.confetti.ConfettoGenerator;
 import com.github.jinatonic.confetti.confetto.BitmapConfetto;
 import com.github.jinatonic.confetti.confetto.Confetto;
 import com.learnmath.R;
-import com.learnmath.activities.MainActivity;
-import com.learnmath.tasks.DrillAddition;
-import com.learnmath.tasks.DrillMutliplication;
-import com.learnmath.tasks.DrillDivision;
-import com.learnmath.tasks.DrillSubtraction;
-import com.learnmath.utils.FontChange;
-import com.learnmath.utils.Util;
+import com.learnmath.Activities.MainActivity;
+import com.learnmath.Tasks.DrillAddition;
+import com.learnmath.Tasks.DrillDivision;
+import com.learnmath.Tasks.DrillMutliplication;
+import com.learnmath.Tasks.DrillSubtraction;
+import com.learnmath.Utils.FontChange;
+import com.learnmath.Utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,26 +61,26 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
     ImageView img_btn_one, img_btn_two, img_btn_three, img_btn_four, img_btn_five, img_btn_six, img_btn_seven, img_btn_eight, img_btn_nine, img_btn_zero, img_home, img_settings;
     public static TextView textview_count, textview_time, txt_drill_head;
     String mfluencyTag = "add", mtextTime;
-    public static String text_count;
+    public String textCount;
     public  boolean msoundShare = false;
     public static String keyNum = "";
-    DrillAddition fluencyAddition;
-    DrillSubtraction fluencySubstraction;
-    DrillMutliplication fluencyMultiplication;
+    public DrillAddition fluencyAddition;
+    public DrillSubtraction fluencySubstraction;
+    public DrillMutliplication fluencyMultiplication;
     ImageView img_explore;
     private int mMinDistance = 100, i, j;
     RelativeLayout rl_explore;
     private float downX, downY, upX, upY;
-    private int CLICK_ACTION_THRESHOLD = 200;
+    public final int CLICK_ACTION_THRESHOLD = 200;
     public static boolean ButtonClicked = false;
     public static CountDownTimer waitTimer;
     ProgressBar progressBar;
     String mtimeLeftNew;
     int msecond;
     int mtextInteger, mtextIntegerShared;
-    public static boolean shared_time_count = false, time_not_null_fluency = false, fluencyInstance = false;
-    DrillDivision fluencyDivision;
-    protected ViewGroup container_new;
+    public boolean sharedTimeCount = false, timeNotNullFluency = false, fluencyInstance = false;
+    public DrillDivision fluencyDivision;
+    protected ViewGroup containerNew;
     private int msize, msizeSpiral;
     private int mvelocitySlow, mvelocityNormal;
     List<Bitmap> bitmaps;
@@ -92,6 +90,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
     private boolean mbackground;
     View view;
     FontChange mfont = new FontChange();
+    Util util = new Util();
 
 
     @Override
@@ -151,7 +150,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
             ll_cal.setOnTouchListener(this);
             img_help.setOnTouchListener(this);
             rl_nav.setOnTouchListener(this);
-            container_new = (ViewGroup) view.findViewById(R.id.confetti_container);
+            containerNew = (ViewGroup) view.findViewById(R.id.confetti_container);
             res = getResources();
             msizeSpiral = res.getDimensionPixelSize(R.dimen.image_size_spiral);
             msize = res.getDimensionPixelSize(R.dimen.image_size);
@@ -161,35 +160,35 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
 
             //Getting  values from shared preference
             prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            if (Settings.count_time) {
+            if (Settings.countTime) {
                 //Condition for came from settings screen(click on apply)
-                Settings.count_time = false;
-                text_count = prefs.getString("numberOfQuestions", "0");
+                Settings.countTime = false;
+                textCount = prefs.getString("numberOfQuestions", "0");
                 mtextTime = prefs.getString("drill_time", "60");
-                textview_count.setText("0" + "/" + text_count);
+                textview_count.setText("0" + "/" + textCount);
                 textview_time.setText(mtextTime);
-                mtextInteger = Integer.parseInt(text_count);
+                mtextInteger = Integer.parseInt(textCount);
             } else {
                 //Condition for came from other than settings
                 //Normal swipe
                 mtimeLeftNew = prefs.getString("time_left", "");
                 //Click on setting but close the settings screen without changing any fields
-                if (Settings.img_close_boolean) {
+                if (Settings.imgCloseBoolean) {
                     //Conditions for setting time and count
-                    shared_time_count = true;
-                    Settings.img_close_boolean = false;
-                    textview_count.setText(String.valueOf(DrillAddition.text_int) + "/" + prefs.getString("numberOfQuestions", "0"));
+                    sharedTimeCount = true;
+                    Settings.imgCloseBoolean = false;
+                    textview_count.setText(String.valueOf(DrillAddition.textInt) + "/" + prefs.getString("numberOfQuestions", "0"));
                     if (mtimeLeftNew.equals("1")) {
                         textview_time.setText(prefs.getString("drill_time", "60"));
                     } else if (textview_time.getText().toString().equals("0")) {
                         textview_time.setText("0");
                     } else {
-                        String time_before_settings = prefs.getString("text_view_time_before_clickon_settings", "");
+                        String timeBeforeSettings = prefs.getString("text_view_time_before_clickon_settings", "");
                         if (waitTimer != null) {
                             if (textview_time.getText().toString().equals("0")) {
                                 textview_time.setText("0");
                             } else {
-                                if (textview_time.getText().toString().equals("60") && (time_before_settings.equals(prefs.getString("drill_time", "60")))) {
+                                if (textview_time.getText().toString().equals("60") && (timeBeforeSettings.equals(prefs.getString("drill_time", "60")))) {
                                     textview_time.setText(prefs.getString("drill_time", "60"));
                                 } else {
                                     if (ApplyMath.apply_facts_timer) {
@@ -299,33 +298,30 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                     break;
                 case "sub":
                     img_change.setTag("sub");
-                    rl_fluency_sub.setVisibility(View.VISIBLE);
                     rl_fluency_add.setVisibility(View.GONE);
+                    rl_fluency_sub.setVisibility(View.VISIBLE);
                     rl_fluency_mul.setVisibility(View.GONE);
                     rl_fluency_division.setVisibility(View.GONE);
                     fluencySubstraction.RandomMethodForSubtraction();
                     break;
                 case "mul":
                     img_change.setTag("mul");
-                    rl_fluency_sub.setVisibility(View.GONE);
                     rl_fluency_add.setVisibility(View.GONE);
+                    rl_fluency_sub.setVisibility(View.GONE);
                     rl_fluency_mul.setVisibility(View.VISIBLE);
                     rl_fluency_division.setVisibility(View.GONE);
                     fluencyMultiplication.RandomMethodForMultplication();
                     break;
                 case "div":
                     img_change.setTag("div");
-                    rl_fluency_sub.setVisibility(View.GONE);
                     rl_fluency_add.setVisibility(View.GONE);
+                    rl_fluency_sub.setVisibility(View.GONE);
                     rl_fluency_mul.setVisibility(View.GONE);
                     rl_fluency_division.setVisibility(View.VISIBLE);
                     fluencyDivision.RandomMethodForDivision();
                     break;
-
             }
-
         }
-
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -351,14 +347,14 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                     float deltaY = downY - upY;
                     //HORIZONTAL SCROLL
                     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        mediaService(R.raw.swoosh);
+                        util.mediaService(getActivity(), R.raw.swoosh, msoundShare);
                         if (Math.abs(deltaX) > mMinDistance) {
                             // Left or right
                             if (deltaX < 0) {
                                 if (waitTimer != null) {
-                                    time_not_null_fluency = true;
+                                    timeNotNullFluency = true;
                                     waitTimer.cancel();
-                                    DrillAddition.text_int = 0;
+                                    DrillAddition.textInt = 0;
                                     Drill.textview_time.setText(prefs.getString("drill_time", "60"));
                                 }
                                 //Swipe left
@@ -374,9 +370,9 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                             }
                             if (deltaX > 0) {
                                 if (waitTimer != null) {
-                                    time_not_null_fluency = true;
+                                    timeNotNullFluency = true;
                                     waitTimer.cancel();
-                                    DrillAddition.text_int = 0;
+                                    DrillAddition.textInt = 0;
                                     Drill.textview_time.setText(prefs.getString("drill_time", "60"));
                                 }
                                 LearnMath learn_facts = new LearnMath();
@@ -399,7 +395,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                             // Top or down
                             if (deltaY < 0) {
                                 //For change operator sound
-                                mediaService(R.raw.change);
+                                util.mediaService(getActivity(),R.raw.change, msoundShare);
                                 switch (img_change.getTag().toString()) {
                                     case "add":
                                         img_change.setImageResource(R.drawable.division);
@@ -430,8 +426,8 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                                         img_change.setTag("sub");
                                         mfluencyTag = "sub";
                                         timerDelayRemoveView(img_change);
-                                        rl_fluency_sub.setVisibility(View.VISIBLE);
                                         rl_fluency_add.setVisibility(View.GONE);
+                                        rl_fluency_sub.setVisibility(View.VISIBLE);
                                         rl_fluency_mul.setVisibility(View.GONE);
                                         rl_fluency_division.setVisibility(View.GONE);
                                         fluencySubstraction.RandomMethodForSubtraction();
@@ -455,7 +451,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                                 return true;
                             }
                             if (deltaY > 0) {
-                                mediaService(R.raw.change);
+                                util.mediaService(getActivity(),R.raw.change, msoundShare);
                                 // Swipe up
                                 switch (img_change.getTag().toString()) {
                                     case "add":
@@ -463,8 +459,8 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                                         img_change.setTag("sub");
                                         mfluencyTag = "sub";
                                         timerDelayRemoveView(img_change);
-                                        rl_fluency_sub.setVisibility(View.VISIBLE);
                                         rl_fluency_add.setVisibility(View.GONE);
+                                        rl_fluency_sub.setVisibility(View.VISIBLE);
                                         rl_fluency_mul.setVisibility(View.GONE);
                                         rl_fluency_division.setVisibility(View.GONE);
                                         fluencySubstraction.RandomMethodForSubtraction();
@@ -562,7 +558,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
             case R.id.img_help:
                 //Help onclick
                 keyNum = "";
-                showDialogInfo();
+                util.showDialogInfo(getActivity(), mfont, getResources().getString(R.string.info_fluency_head), getResources().getString(R.string.fluency_info));
                 break;
 
             case R.id.img_settings:
@@ -647,7 +643,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                 if (Settings.timer) {
                     Settings.timer = false;
                     showingTimerFlowersBombNormal();
-                } else if (shared_time_count) {
+                } else if (sharedTimeCount) {
                     if (textview_time.getText().toString().equals(prefs.getString("drill_time", "60"))) {
                         if (waitTimer != null) {
                             if (j != 0) {
@@ -674,12 +670,12 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                         }
                     }
                 }
-                //Time_not_null_fluency-> is true when we swipe to learnfacts
+                //timeNotNullFluency-> is true when we swipe to learnfacts
 
                 //Timer_not_null_applyfacts-> if timer is running,then stop it when we swipe to applyfacts
-                else if (time_not_null_fluency || ApplyMath.timer_not_null_applyfacts) {
-                    time_not_null_fluency = false;
-                    ApplyMath.timer_not_null_applyfacts = false;
+                else if (timeNotNullFluency || ApplyMath.timerNotNullApplyfacts) {
+                    timeNotNullFluency = false;
+                    ApplyMath.timerNotNullApplyfacts = false;
                     if (waitTimer != null) {
                         if (j != 0) {
                             waitTimer.cancel();
@@ -722,39 +718,13 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
     }
 
     //Save the selected operation
-    public void saveSelectedOperation(String fluency_tag) {
+    public void saveSelectedOperation(String fluencyTag) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("fluency_tag", fluency_tag);
+        editor.putString("fluency_tag", fluencyTag);
         editor.commit();
     }
 
-    //For playing the sounds
-    public void mediaService(int raw) {
-        if (msoundShare) {
-            final MediaPlayer mp = MediaPlayer.create(getActivity(), raw);
-            try {
-                if (mp.isPlaying()) {
-                } else {
-                    mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp1) {
-                            if (mp == mp1) {
-                                mp.start();
-                            }
-                        }
-                    });
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.release();
-                        }
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     // For finding the onclick
     private boolean isAClick(float startX, float endX, float startY, float endY) {
@@ -811,7 +781,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
         if (textview_time.getText().toString().equals("1")) {
             ButtonClicked = false;
             if (mfluencyTag.equals("add") || mfluencyTag.equals("sub") || mfluencyTag.equals("mul") || mfluencyTag.equals("div")) {
-                if (DrillAddition.text_int >= Integer.parseInt(prefs.getString("numberOfQuestions", "0"))) {
+                if (DrillAddition.textInt >= Integer.parseInt(prefs.getString("numberOfQuestions", "0"))) {
                     particles();
                 } else {
                     blast();
@@ -827,7 +797,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
 
         } else {
             bitmaps = generateConfettiBitmaps();
-            mediaService(R.raw.small_crowd_cheering_and_clapping);
+            util.mediaService(getActivity(), R.raw.small_crowd_cheering_and_clapping, msoundShare);
             activeConfettiManagers.add(getConfettiManager().setNumInitialCount(0)
                     .setEmissionDuration(3000)
                     .setEmissionRate(70)
@@ -874,7 +844,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
                     img_explore.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.explore));
                     rl_explore.setBackgroundColor(Color.TRANSPARENT);
                     rl_explore.setVisibility(View.VISIBLE);
-                    mediaService(R.raw.explore);
+                    util.mediaService(getActivity(), R.raw.explore, msoundShare);
                 }
             }, 600);
             handler.postDelayed(new
@@ -934,8 +904,8 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
 
     //For initializing confitti animation
     private ConfettiManager getConfettiManager() {
-        final ConfettiSource source = new ConfettiSource(0, -msize, container_new.getWidth(), -msize);
-        return new ConfettiManager(getActivity(), this, source, container_new)
+        final ConfettiSource source = new ConfettiSource(0, -msize, containerNew.getWidth(), -msize);
+        return new ConfettiManager(getActivity(), this, source, containerNew)
                 .setVelocityX(0, mvelocitySlow)
                 .setVelocityY(mvelocityNormal, mvelocitySlow)
                 .setRotationalVelocity(180, 90)
@@ -970,7 +940,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
     public void clearParticlesOrBombNormal() {
         randomMethod();
         clearForResult();
-        DrillAddition.text_int = 0;
+        DrillAddition.textInt = 0;
         textview_count.setText("0" + "/" + prefs.getString("numberOfQuestions", "0"));
         textview_time.setText(prefs.getString("drill_time", "60"));
         progressBar.setVisibility(View.INVISIBLE);
@@ -982,7 +952,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
     public void ClearMethod() {
 
 
-        DrillAddition.text_int = 0;
+        DrillAddition.textInt = 0;
         textview_count.setText("0" + "/" + prefs.getString("numberOfQuestions", "0"));
         textview_time.setText(prefs.getString("drill_time", "60"));
         clearForResult();
@@ -993,7 +963,7 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
             public void run() {
                 progressBar.setVisibility(View.INVISIBLE);
                 progressBar.setProgress(100);
-                DrillAddition.text_int = 0;
+                DrillAddition.textInt = 0;
                 textview_count.setText("0" + "/" + prefs.getString("numberOfQuestions", "0"));
                 textview_time.setText(prefs.getString("drill_time", "60"));
                 handler.removeCallbacksAndMessages(null);
@@ -1001,8 +971,6 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
         }, 2000);
 
     }
-
-
     //Clearing the result when bomb or particle displayed
     public void clearForResult() {
         DrillAddition.textview_add_result.setText("");
@@ -1010,40 +978,6 @@ public class Drill extends Fragment implements View.OnTouchListener, ConfettoGen
         DrillMutliplication.textview_mul_result.setText("");
         DrillDivision.textview_div_result.setText("");
     }
-
-    //Dialog for click on info button in tab bar
-    private void showDialogInfo() {
-        final Dialog dialog = new Dialog(getActivity(), R.style.DialogTheme);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.info_dialog);
-        TextView txt_info_head = (TextView) dialog.findViewById(R.id.txt_info_head);
-        TextView tv_head = (TextView) dialog.findViewById(R.id.tv_head);
-        TextView tv_body = (TextView) dialog.findViewById(R.id.tv_body);
-        //Setting font style for the textviews
-        mfont.fontChange(txt_info_head, "fonts/textFont.ttf", getActivity());
-        mfont.fontChange(tv_head, "fonts/textFont.ttf", getActivity());
-        mfont.fontChange(tv_body, "fonts/textFont.ttf", getActivity());
-
-
-        tv_head.setText(getResources().getString(R.string.info_fluency_head));
-        tv_body.setText(getResources().getString(R.string.fluency_info));
-        RelativeLayout rl_dissmiss = (RelativeLayout) dialog.findViewById(R.id.rl_dissmiss);
-        rl_dissmiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        ImageView img_dissmiss = (ImageView) dialog.findViewById(R.id.img_close_info);
-        img_dissmiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
     //For showing blast or particles when it is foreground
     //Condition for foreground
     public void onStart() {
